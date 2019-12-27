@@ -1,0 +1,16 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:latest",
+        "tslint-react"
+    ],
+    "rules": {
+        "interface-name": [true, "never-prefix"],
+        "max-line-length": {
+            "options": [120]
+        },
+        "no-consecutive-blank-lines": true,
+        "semicolon": [true, "always"],
+        "quotemark": [true, "single"]
+    }
+}
