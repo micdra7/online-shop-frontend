@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Burger from '../../presentational/Burger/Burger';
+import Navbar from '../Navbar/Navbar';
 
 export interface AppProps { message: string; }
 
 const App: React.FC<AppProps> = ({ message }) => {
 
-    const [active, setActive] = useState(false);
-
-    const handle = (event?: any) => {
-        setActive(!active);
-    };
+    const links = [
+        { href: '/', text: 'Home' },
+        { href: '/categories', text: 'Categories' },
+        { href: '/discounts', text: 'Discounts' },
+        { href: '/cart', text: 'Cart' },
+    ];
 
     return (
         <Router>
-            <Burger active={active} handleClick={handle} />
+            <Navbar links={links} />
+
             <Switch>
                 <Route exact path='/'>
                     <h1 data-testid='appComponent'>
