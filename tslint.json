@@ -14,6 +14,8 @@
         "quotemark": [true, "single"],
         "ordered-imports": false,
         "jsx-boolean-value": false,
-        "jsx-alignment": false
+        "jsx-alignment": false,
+        "trailing-comma": false,
+        "object-literal-sort-keys": false
     }
 }
