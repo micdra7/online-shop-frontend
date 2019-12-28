@@ -1,16 +1,39 @@
+@import '../../../variables.scss';
+
 .navbar-link {
 
-    margin: .15rem;
+    width: 100%;
 
     & a {
         display: inline-block;
-        min-height: 2rem;
+        width: 100%;
+        min-height: 2.25rem;
         text-decoration: none;
-        color: white;
+        color: $light;
         font-size: 1.25rem;
+
+        &:hover {
+            color: $light-darker;
+        }
     }
 
-    &:first-of-type {
-        margin-top: 1rem;
+    &:nth-of-type(even) {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+    }
+
+    @media only screen and (min-width: $medium-bp) {
+
+        width: auto;
+
+        & a {
+            color: $dark;
+            font-size: 2rem;
+
+            &:hover {
+                color: $dark-lighter;
+            }
+        }
     }
 }

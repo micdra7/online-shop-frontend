@@ -1,3 +1,14 @@
+@import '../../../variables.scss';
+
+html {
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: $primary-font;
+}
+
 .wrapper {
     position: fixed;
     top: 3rem;

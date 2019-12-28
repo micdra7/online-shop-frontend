@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 .navbar {
     position: fixed;
     top: 0;
@@ -25,6 +27,7 @@
         margin: 0;
         padding: 0;
         width: 80%;
+        height: calc(3rem + 135px);
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
@@ -38,12 +41,12 @@
         border-top-right-radius: 1rem;
         position: absolute;
         bottom: 0;
-        background-color: white;
+        background-color: $light;
         transition: all .25s ease-in-out;
     }
 
     &.active {
-        background-color: black;
+        background-color: $dark;
         height: calc(3rem + 150px);
 
         & .nav {
@@ -52,6 +55,23 @@
 
         & .bottom {
             height: 15px;
+        }
+    }
+
+    @media only screen and (min-width: $medium-bp) {
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+
+        & .burger {
+            display: none;
+        }
+
+        & .nav {
+            position: static;
+            top: 0;
+            height: 3rem;
+            flex-flow: row nowrap;
+            justify-content: space-around;
         }
     }
 }
