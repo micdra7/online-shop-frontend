@@ -1,5 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/container/App';
+import App from './components/container/App/App';
 
-ReactDOM.render(<App message="hello" />, document.getElementById('app'));
+ReactDOM.render(<App message='hello' />, document.getElementById('app'));

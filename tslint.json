@@ -11,6 +11,9 @@
         },
         "no-consecutive-blank-lines": true,
         "semicolon": [true, "always"],
-        "quotemark": [true, "single"]
+        "quotemark": [true, "single"],
+        "ordered-imports": false,
+        "jsx-boolean-value": false,
+        "jsx-alignment": false
     }
 }
