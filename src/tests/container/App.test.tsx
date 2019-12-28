@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitForElement } from '@testing-library/react';
 
-import App, { AppProps } from '../components/container/App/App';
+import App, { AppProps } from '../../components/container/App/App';
 
 describe('<App />', () => {
     test('Should display a welcome message', async () => {
@@ -9,7 +9,7 @@ describe('<App />', () => {
 
         const appComponent = await findByTestId('appComponent');
 
-        expect(appComponent).toHaveTextContent('Hello from hello');
+        expect(appComponent).toHaveTextContent('hello');
     });
 });
 

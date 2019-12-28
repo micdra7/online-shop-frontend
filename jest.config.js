@@ -7,5 +7,8 @@ module.exports = {
         '@testing-library/jest-dom/extend-expect'
     ],
     testRegex: '(/tests/.*|(\\.|/)(test|spec))\\.tsx?$',
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    moduleNameMapper: {
+        '^.+\\.(css|less|scss)$': 'babel-jest'
+    }
 };
