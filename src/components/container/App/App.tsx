@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
+import './App.scss'
 
 export interface AppProps { message: string; }
 
@@ -13,18 +14,26 @@ const App: React.FC<AppProps> = ({ message }) => {
         { href: '/cart', text: 'Cart' },
     ];
 
-    return (
-        <Router>
-            <Navbar links={links} />
+    const [burgerActive, setBurgerActive] = useState(false);
 
-            <Switch>
-                <Route exact path='/'>
-                    <h1 data-testid='appComponent'>
-                        {message}
-                    </h1>
-                </Route>
-            </Switch>
-        </Router>
+    const handleBurgerClick = (event?: any) => {
+        setBurgerActive(!burgerActive);
+    };
+
+    return (
+        <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
+            <Router>
+                <Navbar links={links} active={burgerActive} handleClick={handleBurgerClick} />
+
+                <Switch>
+                    <Route exact path='/'>
+                        <h1 data-testid='appComponent'>
+                            {message}
+                        </h1>
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
     );
 };
 

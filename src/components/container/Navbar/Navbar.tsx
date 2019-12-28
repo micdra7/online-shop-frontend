@@ -5,26 +5,24 @@ import Burger from '../../presentational/Burger/Burger';
 
 export interface NavbarProps {
     links: Array<{ href: string; text: string; }>;
+    active: boolean;
+    handleClick: (event?: any) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ links }) => {
-
-    const [burgerActive, setBurgerActive] = useState(false);
-
-    const handleBurgerClick = (event?: any) => {
-        setBurgerActive(!burgerActive);
-    };
+const Navbar: React.FC<NavbarProps> = ({ links, active, handleClick }) => {
 
     const renderedLinks = links.map((link) => (
         <NavbarLink key={link.href} href={link.href} text={link.text} />));
 
     return (
-        <nav className='navbar' data-testid='navbar'>
+        <nav className={active ? 'navbar active' : 'navbar'} data-testid='navbar'>
 
             <ul className='nav'>
                 {renderedLinks}
             </ul>
-            <Burger active={burgerActive} handleClick={handleBurgerClick} />
+            <Burger active={active} handleClick={handleClick} />
+
+            <div className='bottom' />
         </nav>
     );
 };

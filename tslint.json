@@ -15,6 +15,7 @@
         "ordered-imports": false,
         "jsx-boolean-value": false,
         "jsx-alignment": false,
-        "trailing-comma": false
+        "trailing-comma": false,
+        "object-literal-sort-keys": false
     }
 }
