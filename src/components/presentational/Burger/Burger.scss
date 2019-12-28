@@ -15,8 +15,16 @@
 
     &.active {
 
+        & .first {
+            transform: translate(0%, 185%) rotate(.125turn);
+        }
+
         & .second {
             opacity: 0;
+        }
+
+        & .third {
+            transform: translate(0%, -185%) rotate(-.125turn);
         }
     }
 }
