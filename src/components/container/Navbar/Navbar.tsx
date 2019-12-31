@@ -16,7 +16,9 @@ const Navbar: React.FC<NavbarProps> = ({ links, active, handleClick }) => {
 
     return (
         <nav className={active ? 'navbar active' : 'navbar'} data-testid='navbar'>
-
+            <div className='brand'>
+                <img src='/public/logo.png' alt='logo' />
+            </div>
             <ul className='nav'>
                 {renderedLinks}
             </ul>

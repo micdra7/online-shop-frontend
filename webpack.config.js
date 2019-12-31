@@ -55,7 +55,7 @@ module.exports = {
         new htmlWebpackPlugin({
             template: './public/index.html',
             filename: './index.html'
-        })
+        }),
     ],
     devServer: {
         host: '0.0.0.0',

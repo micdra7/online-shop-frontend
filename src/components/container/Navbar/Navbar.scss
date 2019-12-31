@@ -20,6 +20,16 @@
         right: 0;
     }
 
+    & .brand {
+        width: 20%;
+        height: 3rem;
+
+        & img {
+            height: 100%;
+            width: auto;
+        }
+    }
+
     & .nav {
         position: fixed;
         top: -100%;
@@ -48,6 +58,12 @@
     &.active {
         background-color: $dark;
         height: calc(3rem + 150px);
+
+        & .brand {
+            & img {
+                filter: invert(100%);
+            }
+        }
 
         & .nav {
             top: 0;
