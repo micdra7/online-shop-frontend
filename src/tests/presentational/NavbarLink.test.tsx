@@ -18,6 +18,7 @@ const renderNavbarLinkComponent = (props?: NavbarLinkProps) => {
     const defaultProps: NavbarLinkProps = {
         href: '/',
         text: 'Home',
+        handleClick: jest.fn,
     };
 
     return render(

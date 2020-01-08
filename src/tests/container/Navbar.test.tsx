@@ -21,7 +21,8 @@ const renderNavbarComponent = (props?: NavbarProps) => {
            {href: '/products', text: 'Products'}
         ],
        active: false,
-       handleClick: jest.fn
+       handleClick: jest.fn,
+       handleLinkClick: jest.fn,
     };
 
     return render(

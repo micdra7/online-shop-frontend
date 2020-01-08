@@ -20,10 +20,15 @@ const App: React.FC<AppProps> = ({ message }) => {
         setBurgerActive(!burgerActive);
     };
 
+    const handleLinkClick = (event?: any) => {
+        setBurgerActive(false);
+    };
+
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
             <Router>
-                <Navbar links={links} active={burgerActive} handleClick={handleBurgerClick} />
+                <Navbar links={links} active={burgerActive} handleClick={handleBurgerClick} 
+                    handleLinkClick={handleLinkClick} />
 
                 <Switch>
                     <Route exact path='/'>
