@@ -8,11 +8,9 @@ html, body, #app, .main {
     width: 100%;
     height: 100%;
     margin: 0;
-    box-sizing: border-box;
 }
 
 * {
-    box-sizing: border-box;
     font-family: $primary-font;
 }
 
@@ -26,5 +24,9 @@ html, body, #app, .main {
 
     &.active {
         top: calc(3rem + 150px);
+    }
+
+    & .main {
+        margin-top: .5rem;
     }
 }

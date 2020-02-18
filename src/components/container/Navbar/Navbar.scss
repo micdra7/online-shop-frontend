@@ -43,6 +43,7 @@
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
+        transition: all .25s ease-in-out;
     }
 
     & .bottom {
