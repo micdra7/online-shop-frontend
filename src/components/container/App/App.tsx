@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
-import './App.scss'
+import './App.scss';
 
 export interface AppProps { message: string; }
 
@@ -27,16 +27,20 @@ const App: React.FC<AppProps> = ({ message }) => {
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
             <Router>
-                <Navbar links={links} active={burgerActive} handleClick={handleBurgerClick} 
+                <Navbar links={links}
+                    active={burgerActive}
+                    handleClick={handleBurgerClick}
                     handleLinkClick={handleLinkClick} />
 
-                <Switch>
-                    <Route exact path='/'>
-                        <h1>
-                            {message}
-                        </h1>
-                    </Route>
-                </Switch>
+                <section className='main'>
+                    <Switch>
+                        <Route exact path='/'>
+                            <h1>
+                                {message}
+                            </h1>
+                        </Route>
+                    </Switch>
+                </section>
             </Router>
         </div>
     );
