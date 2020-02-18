@@ -76,7 +76,7 @@
 
     @media only screen and (min-width: $medium-bp) {
         flex-flow: row nowrap;
-        justify-content: flex-end;
+        justify-content: center;
 
         & .burger {
             display: none;
@@ -88,6 +88,7 @@
             height: 3rem;
             flex-flow: row nowrap;
             justify-content: space-around;
+            width: 50%;
         }
     }
 }

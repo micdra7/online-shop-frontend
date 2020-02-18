@@ -8,7 +8,7 @@ export interface BurgerProps {
 }
 
 const Burger: React.FC<BurgerProps> = ({ active, componentSize = 50, handleClick }) => (
-    <div className={active ? 'burger active' : 'burger'} data-testid='burger'
+    <div className={active ? 'burger active' : 'burger'}
         style={{width: `${componentSize}px`, height: `${componentSize}px`}}
         onClick={handleClick}>
 

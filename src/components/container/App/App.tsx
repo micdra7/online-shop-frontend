@@ -32,7 +32,7 @@ const App: React.FC<AppProps> = ({ message }) => {
 
                 <Switch>
                     <Route exact path='/'>
-                        <h1 data-testid='appComponent'>
+                        <h1>
                             {message}
                         </h1>
                     </Route>
