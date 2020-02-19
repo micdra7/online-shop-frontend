@@ -50,7 +50,7 @@ const App: React.FC<AppProps> = ({ message }) => {
                 <section className='main'>
                     <Switch>
                         <Route exact path='/'>
-                            <ImageSlider imageLinks={imageLinks} hrefs={hrefs} />
+                            <ImageSlider />
                         </Route>
                     </Switch>
                 </section>
