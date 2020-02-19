@@ -3,7 +3,12 @@ import Carousel from 'nuka-carousel';
 import { Link } from 'react-router-dom';
 import './ImageSlider.scss';
 
-const ImageSlider: React.FC = () => {
+export interface ImageSliderProps {
+    imageLinks: string[];
+    hrefs: string[];
+}
+
+const ImageSlider: React.FC<ImageSliderProps> = ({ imageLinks, hrefs }) => {
 
     const settings = {
         autoplay: true,
@@ -11,17 +16,15 @@ const ImageSlider: React.FC = () => {
         wrapAround: true
     };
 
+    const renderedImages = imageLinks.map((image, index) => (
+        <Link key={hrefs[index]} to={hrefs[index]}>
+            <img src={image} alt={`Image for product: ${hrefs[index]}`} />
+        </Link>
+    ));
+
     return (
         <Carousel className='image-slider' {...settings}>
-            <Link to='/product/1'>
-                <img src='https://localhost:5001/images/1.png' alt='product image' />
-            </Link>
-            <Link to='/product/1'>
-                <img src='https://localhost:5001/images/1.png' alt='product image' />
-            </Link>
-            <Link to='/product/1'>
-                <img src='https://localhost:5001/images/1.png' alt='product image' />
-            </Link>
+            {renderedImages}
         </Carousel>
     );
 };
