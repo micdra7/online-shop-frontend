@@ -1,8 +1,9 @@
 .home-page {
     width: 100%;
     height: 100%;
+    flex: 1;
 
-    & .transition-group {
+    & .transition-group, & .transition-group > div {
         width: 100%;
         height: 100%;
     }

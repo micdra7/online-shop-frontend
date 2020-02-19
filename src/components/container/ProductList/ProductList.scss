@@ -1,0 +1,12 @@
+.product-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: scroll;
+
+    & h5 {
+        width: 100%;
+        text-align: center;
+    }
+}

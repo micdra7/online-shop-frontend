@@ -1,0 +1,64 @@
+@import '../../../variables.scss';
+
+.product-element {
+    width: 100%;
+    flex: 1 1 50%;
+    height: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    & a {
+        text-decoration: none;
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+
+        &:link, &:visited {
+            color: $dark;
+        }
+
+        &:hover, &:active {
+            color: $dark-lighter;
+
+            & .price {
+                color: $dark;
+            }
+        }
+
+        & .price {
+            color: $dark-lighter;
+            font-size: .75em;
+        }
+
+        & p {
+            margin: 0;
+            width: 80%;
+        }
+    }
+    
+    & img {
+        display: block;
+        width: 80%;
+        padding: .5rem;
+    }
+
+    & button {
+        display: block;
+        width: 60%;
+        font-size: 1.25rem;
+        color: $light;
+        background-color: $dark;
+        transition: all .5s ease-in-out;
+        border: 1px solid $dark;
+        border-radius: .5rem;
+
+        &:hover, &:active {
+            color: $dark;
+            background-color: $light;
+        }
+    }
+}

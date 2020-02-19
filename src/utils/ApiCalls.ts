@@ -1,15 +1,8 @@
 import axios from 'axios';
+import { Discount, Product } from './Types';
 
 // TODO change that for sth loaded from .env file
 export const currentLink: string = 'https://localhost:5001';
-
-export interface Discount {
-    id: number;
-    productID: number;
-    percentage: number;
-    startTime: Date;
-    endTime: Date;
-}
 
 export const getDiscounts = async (): Promise<Discount[]> => {
 
@@ -21,3 +14,14 @@ export const getDiscounts = async (): Promise<Discount[]> => {
         return [];
     }
 };
+
+export const getLastPurchasedProducts = async (): Promise<Product[]> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/order/last`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+}
