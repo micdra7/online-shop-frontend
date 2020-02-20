@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar';
 import './App.scss';
 import ImageSlider from '../ImageSlider/ImageSlider';
 import HomePage from '../HomePage/HomePage';
+import Footer from '../../presentational/Footer/Footer';
 
 const App: React.FC = () => {
 
@@ -38,6 +39,8 @@ const App: React.FC = () => {
                             <HomePage />
                         </Route>
                     </Switch>
+
+                    <Footer />
                 </section>
             </Router>
         </div>

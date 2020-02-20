@@ -21,7 +21,9 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
     return (
         <div className='product-list'>
             <h5>Recently bought</h5>
-            {renderedProducts}
+            <div className='products'>
+                {renderedProducts}
+            </div>
         </div>
     );
 };
