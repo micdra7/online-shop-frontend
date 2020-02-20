@@ -1,0 +1,12 @@
+@import '../../../variables.scss';
+
+.category-element {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+
+    & .category {
+        width: 100%;
+        text-align: center;
+    }
+}

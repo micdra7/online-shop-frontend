@@ -1,0 +1,10 @@
+@import '../../../variables.scss';
+
+.category-page {
+    width: 100%;
+
+    & .transition-group {
+        width: 100%;
+        height: 100%;
+    }
+}

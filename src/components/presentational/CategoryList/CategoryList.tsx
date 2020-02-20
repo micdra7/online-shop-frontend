@@ -22,7 +22,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories, subcategories }
         <div className='category-list'>
             {renderedCategories}
         </div>
-    )
+    );
 };
 
 export default CategoryList;
