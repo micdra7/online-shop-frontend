@@ -15,3 +15,28 @@ export interface Product {
     price: number;
     availableQuantity: number;
 }
+
+export interface Cart {
+    userID: string;
+    shippingMethodID: number;
+    note: string;
+    cartItems: CartItem[];
+}
+
+export interface CartItem {
+    productID: number;
+    quantity: number;
+}
+
+export interface Category {
+    id: number;
+    name: string;
+    subcategories: Subcategory[];
+}
+
+export interface Subcategory {
+    id: number;
+    categoryID: number;
+    name: string;
+    category: Category;
+}

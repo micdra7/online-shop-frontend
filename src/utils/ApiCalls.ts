@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Discount, Product } from './Types';
+import { Discount, Product, Category, Subcategory } from './Types';
 
 // TODO change that for sth loaded from .env file
 export const currentLink: string = 'https://localhost:5001';
@@ -24,4 +24,26 @@ export const getLastPurchasedProducts = async (): Promise<Product[]> => {
         console.log(error);
         return [];
     }
-}
+};
+
+export const getCategories = async (): Promise<Category[]> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/category`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+
+export const getSubcategories = async (): Promise<Subcategory[]> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/subcategory`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};

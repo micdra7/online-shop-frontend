@@ -9,7 +9,8 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -53,12 +54,14 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            template: './public/index.html',
-            filename: './index.html'
+            template: path.join(__dirname, 'public', 'index.html'),
+            filename: 'index.html'
         }),
     ],
     devServer: {
         host: '0.0.0.0',
-        port: 8080
+        port: 8080,
+        contentBase: './',
+        historyApiFallback: true
     }
 };

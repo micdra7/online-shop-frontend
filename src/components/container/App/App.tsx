@@ -5,6 +5,7 @@ import './App.scss';
 import ImageSlider from '../ImageSlider/ImageSlider';
 import HomePage from '../HomePage/HomePage';
 import Footer from '../../presentational/Footer/Footer';
+import CategoryPage from '../CategoryPage/CategoryPage';
 
 const App: React.FC = () => {
 
@@ -37,6 +38,9 @@ const App: React.FC = () => {
                     <Switch>
                         <Route exact path='/'>
                             <HomePage />
+                        </Route>
+                        <Route path='/categories'>
+                            <CategoryPage />
                         </Route>
                     </Switch>
 
