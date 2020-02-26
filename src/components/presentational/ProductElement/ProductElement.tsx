@@ -8,9 +8,10 @@ export interface ProductElementProps {
     name: string;
     price: number;
     addToCartClick: (id: number) => void;
+    producerName?: string;
 }
 
-const ProductElement: React.FC<ProductElementProps> = ({ productId, name, price, addToCartClick }) => (
+const ProductElement: React.FC<ProductElementProps> = ({ productId, name, price, addToCartClick, producerName }) => (
     <div className='product-element'>
         <Link to={`/product/${productId}`}>
             <img src={`${currentLink}/images/${productId}.png`} alt={`Image for product ${name}`} />
@@ -19,7 +20,7 @@ const ProductElement: React.FC<ProductElementProps> = ({ productId, name, price,
                 {price}$
             </p>
             <p className='name'>
-                {name}
+                {producerName ? `${producerName} ` : ''}{name}
             </p>
         </Link>
 

@@ -5,6 +5,7 @@ import './App.scss';
 import HomePage from '../HomePage/HomePage';
 import Footer from '../../presentational/Footer/Footer';
 import CategoryPage from '../CategoryPage/CategoryPage';
+import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 
 const App: React.FC = () => {
 
@@ -40,6 +41,9 @@ const App: React.FC = () => {
                         </Route>
                         <Route path='/categories'>
                             <CategoryPage />
+                        </Route>
+                        <Route path='/subcategory/:subcategoryId'>
+                            <SubcategoryPage />
                         </Route>
                     </Switch>
 

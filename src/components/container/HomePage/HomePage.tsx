@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
     const HomePageContent: React.FC = () => (
         <div>
             <ImageSlider imageLinks={imageLinks} hrefs={productHrefs} />
-            <ProductList products={products} />
+            <ProductList products={products} message='Recently bought' />
         </div>
     );
 

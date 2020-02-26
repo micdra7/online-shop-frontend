@@ -14,6 +14,12 @@ export interface Product {
     name: string;
     price: number;
     availableQuantity: number;
+    producer: Producer;
+}
+
+export interface Producer {
+    id: number;
+    name: string;
 }
 
 export interface Cart {

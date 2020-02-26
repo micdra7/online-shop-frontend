@@ -47,3 +47,14 @@ export const getSubcategories = async (): Promise<Subcategory[]> => {
         return [];
     }
 };
+
+export const getProducts = async (subcategoryId: number) => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/subcategory/${subcategoryId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
