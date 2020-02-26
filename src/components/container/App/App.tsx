@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import './App.scss';
-import ImageSlider from '../ImageSlider/ImageSlider';
 import HomePage from '../HomePage/HomePage';
 import Footer from '../../presentational/Footer/Footer';
 import CategoryPage from '../CategoryPage/CategoryPage';
