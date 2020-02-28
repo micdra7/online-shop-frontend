@@ -8,7 +8,8 @@
         "module": "commonjs",
         "target": "es5",
         "esModuleInterop": true,
-        "jsx": "react"
+        "jsx": "react",
+        "strictNullChecks": false
     },
     "include": ["src"]
 }

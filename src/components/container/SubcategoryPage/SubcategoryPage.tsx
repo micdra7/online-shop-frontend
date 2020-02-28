@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './SubcategoryPage.scss';
 import { useParams } from 'react-router-dom';
 import { Product } from '../../../utils/Types';
-import { getProducts } from '../../../utils/ApiCalls';
+import { getSubcategoryAndProducts } from '../../../utils/ApiCalls';
 import ProductList from '../ProductList/ProductList';
 
 const SubcategoryPage: React.FC = () => {
@@ -12,7 +12,7 @@ const SubcategoryPage: React.FC = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response: Product[] = (await getProducts(Number(subcategoryId))).products;
+            const response: Product[] = (await getSubcategoryAndProducts(Number(subcategoryId))).products;
 
             setProducts(response);
         };

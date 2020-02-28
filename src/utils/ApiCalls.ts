@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Discount, Product, Category, Subcategory } from './Types';
+import ProductElement from '../components/presentational/ProductElement/ProductElement';
 
 // TODO change that for sth loaded from .env file
 export const currentLink: string = 'https://localhost:5001';
@@ -48,7 +49,7 @@ export const getSubcategories = async (): Promise<Subcategory[]> => {
     }
 };
 
-export const getProducts = async (subcategoryId: number) => {
+export const getSubcategoryAndProducts = async (subcategoryId: number) => {
 
     try {
         const response = await axios.get(`${currentLink}/api/subcategory/${subcategoryId}`);
@@ -56,5 +57,16 @@ export const getProducts = async (subcategoryId: number) => {
     } catch (error) {
         console.log(error);
         return [];
+    }
+};
+
+export const getProduct = async (productId: number): Promise<Product> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/product/${productId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return null;
     }
 };

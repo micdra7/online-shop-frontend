@@ -15,6 +15,9 @@ export interface Product {
     price: number;
     availableQuantity: number;
     producer: Producer;
+    discounts: Discount[];
+    subcategory: Subcategory;
+    category: Category;
 }
 
 export interface Producer {
