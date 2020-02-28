@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
-import './App.scss'
+import './App.scss';
+import HomePage from '../HomePage/HomePage';
+import Footer from '../../presentational/Footer/Footer';
+import CategoryPage from '../CategoryPage/CategoryPage';
+import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 
-export interface AppProps { message: string; }
-
-const App: React.FC<AppProps> = ({ message }) => {
+const App: React.FC = () => {
 
     const links = [
         { href: '/', text: 'Home' },
@@ -20,18 +22,33 @@ const App: React.FC<AppProps> = ({ message }) => {
         setBurgerActive(!burgerActive);
     };
 
+    const handleLinkClick = (event?: any) => {
+        setBurgerActive(false);
+    };
+
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
             <Router>
-                <Navbar links={links} active={burgerActive} handleClick={handleBurgerClick} />
+                <Navbar links={links}
+                    active={burgerActive}
+                    handleClick={handleBurgerClick}
+                    handleLinkClick={handleLinkClick} />
 
-                <Switch>
-                    <Route exact path='/'>
-                        <h1 data-testid='appComponent'>
-                            {message}
-                        </h1>
-                    </Route>
-                </Switch>
+                <section className='main'>
+                    <Switch>
+                        <Route exact path='/'>
+                            <HomePage />
+                        </Route>
+                        <Route path='/categories'>
+                            <CategoryPage />
+                        </Route>
+                        <Route path='/subcategory/:subcategoryId'>
+                            <SubcategoryPage />
+                        </Route>
+                    </Switch>
+
+                    <Footer />
+                </section>
             </Router>
         </div>
     );

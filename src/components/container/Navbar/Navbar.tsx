@@ -7,15 +7,16 @@ export interface NavbarProps {
     links: Array<{ href: string; text: string; }>;
     active: boolean;
     handleClick: (event?: any) => void;
+    handleLinkClick: (event?: any) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ links, active, handleClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ links, active, handleClick, handleLinkClick }) => {
 
     const renderedLinks = links.map((link) => (
-        <NavbarLink key={link.href} href={link.href} text={link.text} />));
+        <NavbarLink key={link.href} href={link.href} text={link.text} handleClick={handleLinkClick} />));
 
     return (
-        <nav className={active ? 'navbar active' : 'navbar'} data-testid='navbar'>
+        <nav className={active ? 'navbar active' : 'navbar'}>
             <div className='brand'>
                 <img src='/public/logo.png' alt='logo' />
             </div>

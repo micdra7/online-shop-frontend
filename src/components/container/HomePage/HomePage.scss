@@ -1,0 +1,35 @@
+.home-page {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+
+    & .transition-group, & .transition-group > div {
+        width: 100%;
+        height: 100%;
+    }
+
+    & .product-list {
+        height: 60%;
+    }
+}
+
+.fade-enter {
+    opacity: 0;
+    z-index: 1;
+
+    &.fade-enter-active {
+        opacity: 1;
+        transition: opacity .25s ease-in;
+        transition-delay: .5s;
+    }
+}
+
+.fade-exit {
+    opacity: 1;
+
+    &.fade-exit-active {
+        display: none;
+        opacity: 0;
+        transition: opacity .25s ease-in;
+    }
+}

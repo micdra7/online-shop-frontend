@@ -1,0 +1,42 @@
+@import '../../../variables.scss';
+
+.category-element {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    & .category {
+        width: 100%;
+        text-align: center;
+    }
+
+    & .subcategory {
+        text-align: center;
+        flex: 1 1 50%;
+        
+        &:nth-of-type(2), &:nth-of-type(3) {
+            border-top: 1px solid $dark;
+        }
+
+        & a {
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+
+            &:link, &:visited {
+                color: $dark;
+            }
+
+            &:hover, &:active {
+                color: $dark-lighter;
+            }
+        }
+    }
+
+    @media (min-width: $small-bp) {
+        flex: 1 1 50%;
+    }
+}

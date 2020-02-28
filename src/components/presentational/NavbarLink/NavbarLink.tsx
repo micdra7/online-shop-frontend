@@ -6,10 +6,11 @@ import './NavbarLink.scss';
 export interface NavbarLinkProps {
     href: string;
     text: string;
+    handleClick: (event?: any) => void;
 }
 
-const NavbarLink: React.FC<NavbarLinkProps> = ({ href, text }) => (
-    <li className='navbar-link' data-testid='navbar-link'>
+const NavbarLink: React.FC<NavbarLinkProps> = ({ href, text, handleClick }) => (
+    <li className='navbar-link' data-testid='navbar-link' onClick={handleClick}>
         <Link to={href}>
             {text}
         </Link>
