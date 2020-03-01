@@ -6,17 +6,14 @@ import ProductElement from '../../presentational/ProductElement/ProductElement';
 export interface ProductListProps {
     products: Product[];
     message?: string;
+    addToCart: (productId: number, quantity: number) => void;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products, message }) => {
-
-    const addToCartClick = (id: number) => {
-        alert(id);
-    };
+const ProductList: React.FC<ProductListProps> = ({ products, message, addToCart }) => {
 
     const renderedProducts = products.map((product) => (
         <ProductElement key={product.name} name={product.name} productId={product.id}
-            price={product.price} producerName={product.producer?.name} addToCartClick={addToCartClick} />
+            price={product.price} producerName={product.producer?.name} addToCartClick={addToCart} />
     ));
 
     return (

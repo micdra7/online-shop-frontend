@@ -7,6 +7,7 @@ import Footer from '../../presentational/Footer/Footer';
 import CategoryPage from '../CategoryPage/CategoryPage';
 import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 import ProductPage from '../ProductPage/ProductPage';
+import { Cart } from '../../../utils/Types';
 
 const App: React.FC = () => {
 
@@ -18,6 +19,12 @@ const App: React.FC = () => {
     ];
 
     const [burgerActive, setBurgerActive] = useState(false);
+    const [cart, setCart] = useState<Cart>({
+        userID: '',
+        shippingMethodID: 0,
+        note: '',
+        cartItems: []
+    });
 
     const handleBurgerClick = (event?: any) => {
         setBurgerActive(!burgerActive);
@@ -25,6 +32,16 @@ const App: React.FC = () => {
 
     const handleLinkClick = (event?: any) => {
         setBurgerActive(false);
+    };
+
+    const addToCart = (productId: number, quantity: number) => {
+        setCart({
+            ...cart,
+            cartItems: cart.cartItems.concat({
+                productID: productId,
+                quantity
+            })
+        });
     };
 
     return (
@@ -38,16 +55,16 @@ const App: React.FC = () => {
                 <section className='main'>
                     <Switch>
                         <Route exact path='/'>
-                            <HomePage />
+                            <HomePage addToCart={addToCart} />
                         </Route>
                         <Route path='/categories'>
                             <CategoryPage />
                         </Route>
                         <Route path='/subcategory/:subcategoryId'>
-                            <SubcategoryPage />
+                            <SubcategoryPage addToCart={addToCart} />
                         </Route>
                         <Route path='/product/:productId'>
-                            <ProductPage />
+                            <ProductPage addToCart={addToCart} />
                         </Route>
                     </Switch>
 

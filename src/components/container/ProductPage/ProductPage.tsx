@@ -4,16 +4,16 @@ import { Product } from '../../../utils/Types';
 import './ProductPage.scss';
 import { useParams } from 'react-router-dom';
 
-const ProductPage: React.FC = () => {
+export interface ProductPageProps {
+    addToCart: (productId: number, quantity: number) => void;
+}
+
+const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
 
     const { productId } = useParams();
     const [itemCount, setItemCount] = useState(1);
     const [product, setProduct] = useState<Product>(null);
     const [price, setPrice] = useState(0);
-
-    const addToCart = () => {
-        return 1;
-    };
 
     const adjustItemCount = (event: any) => {
         setItemCount(
@@ -35,6 +35,8 @@ const ProductPage: React.FC = () => {
             const maxDiscount = Math.max.apply(Math, product.discounts.map((d) => d.percentage));
 
             setPrice(product.price - product.price * (maxDiscount / 100));
+        } else {
+            setPrice(product?.price);
         }
     }, [product]);
 
@@ -55,7 +57,7 @@ const ProductPage: React.FC = () => {
                         {price}$
                     </span>
 
-                    <button className='add-to-cart' onClick={addToCart}>
+                    <button className='add-to-cart' onClick={() => addToCart(product.id, itemCount)}>
                         Add to cart
                     </button>
                 </p>

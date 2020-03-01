@@ -5,7 +5,11 @@ import { Product } from '../../../utils/Types';
 import { getSubcategoryAndProducts } from '../../../utils/ApiCalls';
 import ProductList from '../ProductList/ProductList';
 
-const SubcategoryPage: React.FC = () => {
+export interface SubcategoryPageProps {
+    addToCart: (productId: number, quantity: number) => void;
+}
+
+const SubcategoryPage: React.FC<SubcategoryPageProps> = ({ addToCart }) => {
 
     const { subcategoryId } = useParams();
     const [products, setProducts] = useState<Product[]>([]);
@@ -22,7 +26,7 @@ const SubcategoryPage: React.FC = () => {
 
     return (
         <div className='subcategory-page'>
-            {products.length > 0 ? <ProductList products={products} /> : <></>}
+            {products.length > 0 ? <ProductList products={products} addToCart={addToCart} /> : <></>}
         </div>
     );
 };
