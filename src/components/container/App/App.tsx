@@ -8,7 +8,8 @@ import CategoryPage from '../CategoryPage/CategoryPage';
 import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 import ProductPage from '../ProductPage/ProductPage';
 import { Cart } from '../../../utils/Types';
-import { sessionStorageCartKey } from '../../../utils/Constants';
+import { sessionStorageCartKey, initialCartState } from '../../../utils/Constants';
+import CartPage from '../CartPage/CartPage';
 
 const App: React.FC = () => {
 
@@ -20,12 +21,7 @@ const App: React.FC = () => {
     ];
 
     const [burgerActive, setBurgerActive] = useState(false);
-    const [cart, setCart] = useState<Cart>({
-        userID: '',
-        shippingMethodID: 0,
-        note: '',
-        cartItems: []
-    });
+    const [cart, setCart] = useState<Cart>(initialCartState);
 
     const handleBurgerClick = (event?: any) => {
         setBurgerActive(!burgerActive);
@@ -42,6 +38,30 @@ const App: React.FC = () => {
                 productID: productId,
                 quantity
             })
+        });
+    };
+
+    const clearCart = () => {
+        setCart(initialCartState);
+    };
+
+    const deleteItemFromCart = (productId: number) => {
+        const newCartItems = cart.cartItems.filter((item) => item.productID !== productId);
+
+        setCart({
+            ...cart,
+            cartItems: newCartItems
+        });
+    };
+
+    const updateItemQuantity = (productId: number, quantity: number) => {
+        let newCartItems = cart.cartItems.filter((item) => item.productID !== productId);
+
+        newCartItems = newCartItems.concat({productID: productId, quantity});
+
+        setCart({
+            ...cart,
+            cartItems: newCartItems
         });
     };
 
@@ -79,6 +99,10 @@ const App: React.FC = () => {
                         </Route>
                         <Route path='/product/:productId'>
                             <ProductPage addToCart={addToCart} />
+                        </Route>
+                        <Route path='/cart'>
+                            <CartPage cart={cart} clearCart={clearCart}
+                            deleteItemFromCart={deleteItemFromCart} updateItemQuantity={updateItemQuantity} />
                         </Route>
                     </Switch>
 
