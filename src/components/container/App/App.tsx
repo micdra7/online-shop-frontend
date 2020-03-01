@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import './App.scss';
@@ -8,6 +8,7 @@ import CategoryPage from '../CategoryPage/CategoryPage';
 import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 import ProductPage from '../ProductPage/ProductPage';
 import { Cart } from '../../../utils/Types';
+import { sessionStorageCartKey } from '../../../utils/Constants';
 
 const App: React.FC = () => {
 
@@ -43,6 +44,19 @@ const App: React.FC = () => {
             })
         });
     };
+
+    // saving cart in sessionStorage in case user refreshes the page
+    useEffect(() => {
+        const sessionCart: Cart = JSON.parse(sessionStorage.getItem(sessionStorageCartKey));
+
+        if (sessionCart) {
+            setCart(sessionCart);
+        }
+    }, []);
+
+    useEffect(() => {
+        sessionStorage.setItem(sessionStorageCartKey, JSON.stringify(cart));
+    }, [cart.cartItems]);
 
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
