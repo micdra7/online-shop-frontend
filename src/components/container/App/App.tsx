@@ -10,6 +10,7 @@ import ProductPage from '../ProductPage/ProductPage';
 import { Cart } from '../../../utils/Types';
 import { sessionStorageCartKey, initialCartState } from '../../../utils/Constants';
 import CartPage from '../CartPage/CartPage';
+import LoginRegisterPage from '../LoginRegisterPage/LoginRegisterPage';
 
 const App: React.FC = () => {
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         { href: '/categories', text: 'Categories' },
         { href: '/discounts', text: 'Discounts' },
         { href: '/cart', text: 'Cart' },
+        { href: '/login', text: 'Login / Register'}
     ];
 
     const [burgerActive, setBurgerActive] = useState(false);
@@ -106,6 +108,9 @@ const App: React.FC = () => {
                         <Route path='/cart'>
                             <CartPage cart={cart} clearCart={clearCart}
                             deleteItemFromCart={deleteItemFromCart} updateItemQuantity={updateItemQuantity} />
+                        </Route>
+                        <Route path='/login'>
+                            <LoginRegisterPage />
                         </Route>
                     </Switch>
 

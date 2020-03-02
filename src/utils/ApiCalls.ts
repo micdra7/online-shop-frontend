@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Discount, Product, Category, Subcategory } from './Types';
+import { Discount, Product, Category, Subcategory, User } from './Types';
 import ProductElement from '../components/presentational/ProductElement/ProductElement';
 
 // TODO change that for sth loaded from .env file
@@ -77,6 +77,54 @@ export const getSelectedProducts = async (arrayOfProductIds: number[]): Promise<
         const requestParams = arrayOfProductIds.map((id) => `ids=${id}&`).toString().replace(',', '');
 
         const response = await axios.get(`${currentLink}/api/product/selected?${requestParams}`);
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
+export const register = async (user: User) => {
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const response = await axios.post(`${currentLink}/api/account/register`, {
+            username: user.username,
+            password: user.password,
+            email: user.email,
+            name: user.name,
+            surname: user.surname
+        }, options);
+
+        return response.status;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
+export const login = async (user: User): Promise<string[]> => {
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const response = await axios.post(`${currentLink}/api/account/login`, {
+            username: user.username,
+            password: user.password,
+            email: user.email,
+            name: user.name,
+            surname: user.surname
+        }, options);
 
         return response.data;
     } catch (error) {
