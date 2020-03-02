@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import './App.scss';
@@ -6,6 +6,11 @@ import HomePage from '../HomePage/HomePage';
 import Footer from '../../presentational/Footer/Footer';
 import CategoryPage from '../CategoryPage/CategoryPage';
 import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
+import ProductPage from '../ProductPage/ProductPage';
+import { Cart } from '../../../utils/Types';
+import { sessionStorageCartKey, initialCartState } from '../../../utils/Constants';
+import CartPage from '../CartPage/CartPage';
+import LoginRegisterPage from '../LoginRegisterPage/LoginRegisterPage';
 
 const App: React.FC = () => {
 
@@ -14,9 +19,11 @@ const App: React.FC = () => {
         { href: '/categories', text: 'Categories' },
         { href: '/discounts', text: 'Discounts' },
         { href: '/cart', text: 'Cart' },
+        { href: '/login', text: 'Login / Register'}
     ];
 
     const [burgerActive, setBurgerActive] = useState(false);
+    const [cart, setCart] = useState<Cart>(initialCartState);
 
     const handleBurgerClick = (event?: any) => {
         setBurgerActive(!burgerActive);
@@ -25,6 +32,56 @@ const App: React.FC = () => {
     const handleLinkClick = (event?: any) => {
         setBurgerActive(false);
     };
+
+    const addToCart = (productId: number, quantity: number) => {
+        setCart({
+            ...cart,
+            cartItems: cart.cartItems.concat({
+                productID: productId,
+                quantity
+            })
+        });
+    };
+
+    const clearCart = () => {
+        setCart(initialCartState);
+    };
+
+    const deleteItemFromCart = (productId: number) => {
+        const newCartItems = cart.cartItems.filter((item) => item.productID !== productId);
+
+        setCart({
+            ...cart,
+            cartItems: newCartItems
+        });
+    };
+
+    const updateItemQuantity = (productId: number, quantity: number) => {
+        let newCartItems = cart.cartItems.filter((item) => item.productID !== productId);
+
+        newCartItems = newCartItems.concat({productID: productId, quantity});
+
+        setCart({
+            ...cart,
+            cartItems: newCartItems
+        });
+    };
+
+    // saving cart in sessionStorage in case user refreshes the page
+    useEffect(() => {
+        const sessionCart: Cart = JSON.parse(sessionStorage.getItem(sessionStorageCartKey));
+
+        if (sessionCart) {
+            setCart(sessionCart);
+        }
+
+        // TODO delete when not needed
+        clearCart();
+    }, []);
+
+    useEffect(() => {
+        sessionStorage.setItem(sessionStorageCartKey, JSON.stringify(cart));
+    }, [cart.cartItems]);
 
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
@@ -37,13 +94,23 @@ const App: React.FC = () => {
                 <section className='main'>
                     <Switch>
                         <Route exact path='/'>
-                            <HomePage />
+                            <HomePage addToCart={addToCart} />
                         </Route>
                         <Route path='/categories'>
                             <CategoryPage />
                         </Route>
                         <Route path='/subcategory/:subcategoryId'>
-                            <SubcategoryPage />
+                            <SubcategoryPage addToCart={addToCart} />
+                        </Route>
+                        <Route path='/product/:productId'>
+                            <ProductPage addToCart={addToCart} />
+                        </Route>
+                        <Route path='/cart'>
+                            <CartPage cart={cart} clearCart={clearCart}
+                            deleteItemFromCart={deleteItemFromCart} updateItemQuantity={updateItemQuantity} />
+                        </Route>
+                        <Route path='/login'>
+                            <LoginRegisterPage />
                         </Route>
                     </Switch>
 

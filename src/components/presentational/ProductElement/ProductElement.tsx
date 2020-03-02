@@ -7,7 +7,7 @@ export interface ProductElementProps {
     productId: number;
     name: string;
     price: number;
-    addToCartClick: (id: number) => void;
+    addToCartClick: (productId: number, quantity: number) => void;
     producerName?: string;
 }
 
@@ -24,7 +24,7 @@ const ProductElement: React.FC<ProductElementProps> = ({ productId, name, price,
             </p>
         </Link>
 
-        <button className='add-to-cart' onClick={() => addToCartClick(productId)}>
+        <button className='add-to-cart' onClick={() => addToCartClick(productId, 1)}>
             Add to cart
         </button>
     </div>

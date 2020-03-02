@@ -7,7 +7,11 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Discount, Product } from '../../../utils/Types';
 import ProductList from '../ProductList/ProductList';
 
-const HomePage: React.FC = () => {
+export interface HomePageProps {
+    addToCart: (productId: number, quantity: number) => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ addToCart }) => {
 
     const [discounts, setDiscounts] = useState<Discount[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
@@ -17,7 +21,7 @@ const HomePage: React.FC = () => {
     const HomePageContent: React.FC = () => (
         <div>
             <ImageSlider imageLinks={imageLinks} hrefs={productHrefs} />
-            <ProductList products={products} message='Recently bought' />
+            <ProductList products={products} message='Recently bought' addToCart={addToCart} />
         </div>
     );
 
