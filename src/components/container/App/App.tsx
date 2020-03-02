@@ -72,6 +72,9 @@ const App: React.FC = () => {
         if (sessionCart) {
             setCart(sessionCart);
         }
+
+        // TODO delete when not needed
+        clearCart();
     }, []);
 
     useEffect(() => {

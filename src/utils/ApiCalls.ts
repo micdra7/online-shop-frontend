@@ -70,3 +70,17 @@ export const getProduct = async (productId: number): Promise<Product> => {
         return null;
     }
 };
+
+export const getSelectedProducts = async (arrayOfProductIds: number[]): Promise<Product[]> => {
+
+    try {
+        const requestParams = arrayOfProductIds.map((id) => `ids=${id}&`).toString().replace(',', '');
+
+        const response = await axios.get(`${currentLink}/api/product/selected?${requestParams}`);
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
