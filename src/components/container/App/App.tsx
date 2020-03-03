@@ -11,6 +11,7 @@ import { Cart } from '../../../utils/Types';
 import { sessionStorageCartKey, initialCartState } from '../../../utils/Constants';
 import CartPage from '../CartPage/CartPage';
 import LoginRegisterPage from '../LoginRegisterPage/LoginRegisterPage';
+import DiscountPage from '../DiscountPage/DiscountPage';
 
 const App: React.FC = () => {
 
@@ -104,6 +105,9 @@ const App: React.FC = () => {
                         </Route>
                         <Route path='/product/:productId'>
                             <ProductPage addToCart={addToCart} />
+                        </Route>
+                        <Route path='/discounts'>
+                            <DiscountPage addToCart={addToCart} />
                         </Route>
                         <Route path='/cart'>
                             <CartPage cart={cart} clearCart={clearCart}
