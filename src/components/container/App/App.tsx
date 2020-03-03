@@ -110,8 +110,11 @@ const App: React.FC = () => {
                             <DiscountPage addToCart={addToCart} />
                         </Route>
                         <Route path='/cart'>
-                            <CartPage cart={cart} clearCart={clearCart}
-                            deleteItemFromCart={deleteItemFromCart} updateItemQuantity={updateItemQuantity} />
+                            <CartPage
+                                cart={cart}
+                                clearCart={clearCart}
+                                deleteItemFromCart={deleteItemFromCart}
+                                updateItemQuantity={updateItemQuantity} />
                         </Route>
                         <Route path='/login'>
                             <LoginRegisterPage />
