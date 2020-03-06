@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginRegisterPage.scss';
 import { login, register } from '../../../utils/ApiCalls';
-import { localStorageJWTKey, localStorageRefreshTokenKey } from '../../../utils/Constants';
+import { localStorageJWTKey, localStorageRefreshTokenKey, localStorageUsernameKey } from '../../../utils/Constants';
 
 const LoginRegisterPage: React.FC = () => {
 
@@ -22,6 +22,7 @@ const LoginRegisterPage: React.FC = () => {
 
         localStorage.setItem(localStorageJWTKey, response.jwt);
         localStorage.setItem(localStorageRefreshTokenKey, response.refreshToken);
+        localStorage.setItem(localStorageUsernameKey, username);
     };
 
     const performRegistration = async () => {

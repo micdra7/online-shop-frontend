@@ -57,3 +57,53 @@ export interface User {
     name?: string;
     surname?: string;
 }
+
+export interface Order {
+    id: number;
+    applicationUserId: string;
+    shippingMethodId: string;
+    dateAndTime: Date;
+    note: string;
+    shippingMethodPrice: number;
+    applicationUser: User;
+    shippingMethod: ShippingMethod;
+    details: OrderDetail[];
+    invoices: Invoice[];
+}
+
+export interface ShippingMethod {
+    id: number;
+    name: string;
+    price: number;
+}
+
+export interface OrderDetail {
+    id: number;
+    orderId: number;
+    productId: number;
+    unitPrice: number;
+    quantity: number;
+    order: Order;
+    product: Product;
+}
+
+export interface Invoice {
+    id: number;
+    applicationUserId: string;
+    orderId: number;
+    totalValue: number;
+    dateIssued: Date;
+    applicationUser: User;
+    order: Order;
+    details: InvoiceDetail[];
+}
+
+export interface InvoiceDetail {
+    id: number;
+    invoiceId: number;
+    productId: number;
+    itemQuantity: number;
+    itemPrice: number;
+    invoice: Invoice;
+    product: Product;
+}

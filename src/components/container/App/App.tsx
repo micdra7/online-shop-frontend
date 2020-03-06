@@ -12,6 +12,9 @@ import { sessionStorageCartKey, initialCartState } from '../../../utils/Constant
 import CartPage from '../CartPage/CartPage';
 import LoginRegisterPage from '../LoginRegisterPage/LoginRegisterPage';
 import DiscountPage from '../DiscountPage/DiscountPage';
+import PrivateRoute from '../../presentational/PrivateRoute/PrivateRoute';
+import OrderPage from '../OrderPage/OrderPage';
+import { refreshJWT } from '../../../utils/ApiCalls';
 
 const App: React.FC = () => {
 
@@ -81,6 +84,14 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        const reauthenticate = async () => {
+            await refreshJWT();
+        };
+
+        reauthenticate();
+    }, []);
+
+    useEffect(() => {
         sessionStorage.setItem(sessionStorageCartKey, JSON.stringify(cart));
     }, [cart.cartItems]);
 
@@ -97,18 +108,23 @@ const App: React.FC = () => {
                         <Route exact path='/'>
                             <HomePage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/categories'>
                             <CategoryPage />
                         </Route>
+
                         <Route path='/subcategory/:subcategoryId'>
                             <SubcategoryPage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/product/:productId'>
                             <ProductPage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/discounts'>
                             <DiscountPage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/cart'>
                             <CartPage
                                 cart={cart}
@@ -116,6 +132,11 @@ const App: React.FC = () => {
                                 deleteItemFromCart={deleteItemFromCart}
                                 updateItemQuantity={updateItemQuantity} />
                         </Route>
+
+                        <PrivateRoute path='/order'>
+                            <OrderPage />
+                        </PrivateRoute>
+
                         <Route path='/login'>
                             <LoginRegisterPage />
                         </Route>
