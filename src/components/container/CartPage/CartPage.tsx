@@ -3,6 +3,7 @@ import './CartPage.scss';
 import { Cart, Product } from '../../../utils/Types';
 import CartItem from '../CartItem/CartItem';
 import { getSelectedProducts } from '../../../utils/ApiCalls';
+import { Link } from 'react-router-dom';
 
 export interface CartPageProps {
     cart: Cart;
@@ -57,6 +58,10 @@ const CartPage: React.FC<CartPageProps> = ({ cart, clearCart, deleteItemFromCart
             </button>
 
             {renderedItems}
+
+            <Link to='/order'>
+                Place order
+            </Link>
         </div>
     );
 };

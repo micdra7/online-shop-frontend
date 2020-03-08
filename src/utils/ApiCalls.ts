@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { Discount, Product, Category, Subcategory, User } from './Types';
-import { localStorageUsernameKey, localStorageRefreshTokenKey, localStorageJWTKey } from './Constants';
+import { Discount, Product, Category, Subcategory, User, Cart, UserDetail, ShippingMethod, PaymentType } from './Types';
+import { LOCAL_STORAGE_USERNAME_KEY, LOCAL_STORAGE_REFRESH_TOKEN_KEY, LOCAL_STORAGE_JWT_KEY } from './Constants';
 
 // TODO change that for sth loaded from .env file
 export const currentLink: string = 'https://localhost:5001';
 
-axios.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem(localStorageJWTKey)}` }
+axios.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_JWT_KEY)}` }
 
 export const getDiscounts = async (): Promise<Discount[]> => {
 
@@ -135,22 +135,108 @@ export const login = async (user: User): Promise<any> => {
     }
 };
 
+export const sendOrder = async (cart: Cart) => {
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const response = await axios.post(`${currentLink}/api/account/login`, {
+            ...cart
+        }, options);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const getShippingMethods = async (): Promise<ShippingMethod[]> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/order/shipping-methods`);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const getPaymentTypes = async (): Promise<PaymentType[]> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/order/payment-types`);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const getUserDetails = async (): Promise<UserDetail[]> => {
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const response = await axios.post(`${currentLink}/api/account/details`, {
+            username: localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)
+        }, options);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
 const checkIf401AndRefresh = async (error: any): Promise<any> => {
 
     if (error.response.status === 401) {
-        try {
-            const response = await axios.post(`${currentLink}/api/account/login`, {
-                user: {
-                    username: localStorage.getItem(localStorageUsernameKey)
-                },
-                refreshToken: localStorage.getItem(localStorageRefreshTokenKey)
-            });
+        refreshJWT();
+    }
+};
 
-            localStorage.setItem(localStorageJWTKey, response.data.jwt);
-            localStorage.setItem(localStorageRefreshTokenKey, response.data.refreshToken);
-        } catch (error) {
-            console.log(error);
-            return null;
+export const refreshJWT = async (): Promise<any> => {
+
+    const username: string = localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY);
+    const refreshToken: string = localStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
+
+    if (username === '' || refreshToken === '') {
+        localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, '');
+        localStorage.setItem(LOCAL_STORAGE_JWT_KEY, '');
+        localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, '');
+        return;
+    }
+
+    try {
+        const response = await axios.post(`${currentLink}/api/account/refresh`, {
+            user: {
+                username
+            },
+            refreshToken
+        });
+
+        localStorage.setItem(LOCAL_STORAGE_JWT_KEY, response.data.jwt);
+        localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, response.data.refreshToken);
+    } catch (error) {
+
+        if (error.response.status === 400) {
+            localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, '');
+            localStorage.setItem(LOCAL_STORAGE_JWT_KEY, '');
+            localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, '');
         }
+
+        console.log(error);
+        return null;
     }
 };

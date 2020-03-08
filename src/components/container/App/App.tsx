@@ -8,10 +8,14 @@ import CategoryPage from '../CategoryPage/CategoryPage';
 import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 import ProductPage from '../ProductPage/ProductPage';
 import { Cart } from '../../../utils/Types';
-import { sessionStorageCartKey, initialCartState } from '../../../utils/Constants';
+import { SESSION_STORAGE_CART_KEY, initialCartState } from '../../../utils/Constants';
 import CartPage from '../CartPage/CartPage';
 import LoginRegisterPage from '../LoginRegisterPage/LoginRegisterPage';
 import DiscountPage from '../DiscountPage/DiscountPage';
+import PrivateRoute from '../../presentational/PrivateRoute/PrivateRoute';
+import OrderPage from '../OrderPage/OrderPage';
+import { refreshJWT } from '../../../utils/ApiCalls';
+import { checkIfLoggedIn } from '../../../utils/Helper';
 
 const App: React.FC = () => {
 
@@ -20,7 +24,10 @@ const App: React.FC = () => {
         { href: '/categories', text: 'Categories' },
         { href: '/discounts', text: 'Discounts' },
         { href: '/cart', text: 'Cart' },
-        { href: '/login', text: 'Login / Register'}
+        {
+            href: checkIfLoggedIn ? '/account' : '/login',
+            text: checkIfLoggedIn ? 'My account' : 'Login / Register'
+        }
     ];
 
     const [burgerActive, setBurgerActive] = useState(false);
@@ -70,7 +77,7 @@ const App: React.FC = () => {
 
     // saving cart in sessionStorage in case user refreshes the page
     useEffect(() => {
-        const sessionCart: Cart = JSON.parse(sessionStorage.getItem(sessionStorageCartKey));
+        const sessionCart: Cart = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CART_KEY));
 
         if (sessionCart) {
             setCart(sessionCart);
@@ -81,7 +88,15 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        sessionStorage.setItem(sessionStorageCartKey, JSON.stringify(cart));
+        const reauthenticate = async () => {
+            await refreshJWT();
+        };
+
+        reauthenticate();
+    }, []);
+
+    useEffect(() => {
+        sessionStorage.setItem(SESSION_STORAGE_CART_KEY, JSON.stringify(cart));
     }, [cart.cartItems]);
 
     return (
@@ -97,18 +112,23 @@ const App: React.FC = () => {
                         <Route exact path='/'>
                             <HomePage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/categories'>
                             <CategoryPage />
                         </Route>
+
                         <Route path='/subcategory/:subcategoryId'>
                             <SubcategoryPage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/product/:productId'>
                             <ProductPage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/discounts'>
                             <DiscountPage addToCart={addToCart} />
                         </Route>
+
                         <Route path='/cart'>
                             <CartPage
                                 cart={cart}
@@ -116,6 +136,11 @@ const App: React.FC = () => {
                                 deleteItemFromCart={deleteItemFromCart}
                                 updateItemQuantity={updateItemQuantity} />
                         </Route>
+
+                        <PrivateRoute path='/order'>
+                            <OrderPage cart={cart} />
+                        </PrivateRoute>
+
                         <Route path='/login'>
                             <LoginRegisterPage />
                         </Route>
