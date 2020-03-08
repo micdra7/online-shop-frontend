@@ -9,6 +9,7 @@ import {
     } from '../../../utils/Constants';
 import { loginPageReducer } from '../../../utils/Reducers';
 import { login } from '../../../utils/ApiCalls';
+import FormControl from '../../presentational/FormControl/FormControl';
 
 const LoginForm: React.FC = () => {
 
@@ -35,18 +36,20 @@ const LoginForm: React.FC = () => {
     return (
         <section className='login'>
             <p>
-                <label htmlFor='login-username'>Login</label>
-                <input type='text'
+                <FormControl
+                    label='Login'
+                    name='login-username'
+                    type='text'
                     value={state.username}
-                    onChange={(event) => dispatch({type: ACTION_SET_USERNAME, payload: event.target.value})}
-                    name='login-username' />
+                    onChangeHandler={(event) => dispatch({type: ACTION_SET_USERNAME, payload: event.target.value})} />
             </p>
             <p>
-                <label htmlFor='login-password'>Password</label>
-                <input type='password'
+                <FormControl
+                    label='Password'
+                    name='login-password'
+                    type='password'
                     value={state.password}
-                    onChange={(event) => dispatch({type: ACTION_SET_PASSWORD, payload: event.target.value})}
-                    name='login-password' />
+                    onChangeHandler={(event) => dispatch({type: ACTION_SET_PASSWORD, payload: event.target.value})} />
             </p>
             <button className='login' onClick={performLogin}>
                 Login

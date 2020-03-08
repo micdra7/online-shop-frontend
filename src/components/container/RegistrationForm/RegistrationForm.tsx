@@ -9,6 +9,7 @@ import {
         ACTION_SET_EMAIL,
         ACTION_SET_NAME 
     } from '../../../utils/Constants';
+import FormControl from '../../presentational/FormControl/FormControl';
 
 const RegistrationForm: React.FC = () => {
 
@@ -39,44 +40,44 @@ const RegistrationForm: React.FC = () => {
     return (
         <section className='register'>
             <p>
-                <label htmlFor='login-username'>Login</label>
-                <input
+                <FormControl
+                    label='Login'
+                    name='register-username'
                     type='text'
                     value={state.username}
-                    onChange={(event) => dispatch({type: ACTION_SET_USERNAME, payload: event.target.value})}
-                    name='register-username' />
+                    onChangeHandler={(event) => dispatch({type: ACTION_SET_USERNAME, payload: event.target.value})} />
             </p>
             <p>
-                <label htmlFor='login-password'>Password</label>
-                <input
+                <FormControl
+                    label='Password'
+                    name='register-password'
                     type='password'
                     value={state.password}
-                    onChange={(event) => dispatch({type: ACTION_SET_PASSWORD, payload: event.target.value})}
-                    name='register-password' />
+                    onChangeHandler={(event) => dispatch({type: ACTION_SET_PASSWORD, payload: event.target.value})} />
             </p>
             <p>
-                <label htmlFor='register-email'>Email</label>
-                <input
+                <FormControl
+                    label='Email'
+                    name='register-email'
                     type='email'
                     value={state.email}
-                    onChange={(event) => dispatch({type: ACTION_SET_EMAIL, payload: event.target.value})}
-                    name='register-email' />
+                    onChangeHandler={(event) => dispatch({type: ACTION_SET_EMAIL, payload: event.target.value})} />
             </p>
             <p>
-                <label htmlFor='register-name'>Name</label>
-                <input
+                <FormControl
+                    label='Name'
+                    name='register-name'
                     type='text'
                     value={state.name}
-                    onChange={(event) => dispatch({type: ACTION_SET_NAME, payload: event.target.value})}
-                    name='register-name' />
+                    onChangeHandler={(event) => dispatch({type: ACTION_SET_NAME, payload: event.target.value})} />
             </p>
             <p>
-                <label htmlFor='register-surname'>Surname</label>
-                <input
+                <FormControl
+                    label='Surname'
+                    name='register-surname'
                     type='text'
                     value={state.surname}
-                    onChange={(event) => dispatch({type: ACTION_SET_SURNAME, payload: event.target.value})}
-                    name='register-surname' />
+                    onChangeHandler={(event) => dispatch({type: ACTION_SET_SURNAME, payload: event.target.value})} />
             </p>
             <button className='register' onClick={performRegistration}>
                 Register

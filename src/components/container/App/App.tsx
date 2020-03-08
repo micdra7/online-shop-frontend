@@ -15,6 +15,7 @@ import DiscountPage from '../DiscountPage/DiscountPage';
 import PrivateRoute from '../../presentational/PrivateRoute/PrivateRoute';
 import OrderPage from '../OrderPage/OrderPage';
 import { refreshJWT } from '../../../utils/ApiCalls';
+import { checkIfLoggedIn } from '../../../utils/Helper';
 
 const App: React.FC = () => {
 
@@ -23,7 +24,10 @@ const App: React.FC = () => {
         { href: '/categories', text: 'Categories' },
         { href: '/discounts', text: 'Discounts' },
         { href: '/cart', text: 'Cart' },
-        { href: '/login', text: 'Login / Register'}
+        {
+            href: checkIfLoggedIn ? '/account' : '/login',
+            text: checkIfLoggedIn ? 'My account' : 'Login / Register'
+        }
     ];
 
     const [burgerActive, setBurgerActive] = useState(false);
