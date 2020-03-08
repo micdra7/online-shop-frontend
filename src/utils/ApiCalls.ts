@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Discount, Product, Category, Subcategory, User, Cart } from './Types';
+import { Discount, Product, Category, Subcategory, User, Cart, UserDetail, ShippingMethod, PaymentType } from './Types';
 import { LOCAL_STORAGE_USERNAME_KEY, LOCAL_STORAGE_REFRESH_TOKEN_KEY, LOCAL_STORAGE_JWT_KEY } from './Constants';
 
 // TODO change that for sth loaded from .env file
@@ -146,6 +146,50 @@ export const sendOrder = async (cart: Cart) => {
     try {
         const response = await axios.post(`${currentLink}/api/account/login`, {
             ...cart
+        }, options);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const getShippingMethods = async (): Promise<ShippingMethod[]> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/order/shipping-methods`);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const getPaymentTypes = async (): Promise<PaymentType[]> => {
+
+    try {
+        const response = await axios.get(`${currentLink}/api/order/payment-types`);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const getUserDetails = async (): Promise<UserDetail[]> => {
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const response = await axios.post(`${currentLink}/api/account/details`, {
+            username: localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)
         }, options);
 
         return response.data;

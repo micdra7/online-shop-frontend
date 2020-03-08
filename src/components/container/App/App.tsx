@@ -138,7 +138,7 @@ const App: React.FC = () => {
                         </Route>
 
                         <PrivateRoute path='/order'>
-                            <OrderPage />
+                            <OrderPage cart={cart} />
                         </PrivateRoute>
 
                         <Route path='/login'>

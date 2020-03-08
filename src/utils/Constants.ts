@@ -11,8 +11,15 @@ export const ACTION_SET_EMAIL = 'set-email';
 export const ACTION_SET_NAME = 'set-name';
 export const ACTION_SET_SURNAME = 'set-surname';
 
+export const ACTION_SET_SHIPPING_METHOD_ID = 'set-shipping-method-id';
+export const ACTION_SET_PAYMENT_TYPE_ID = 'set-payment-type-id';
+export const ACTION_SET_ORDER_NOTE = 'set-order-note';
+export const ACTION_SET_ADDRESS_1 = 'set-address-1';
+export const ACTION_SET_ADDRESS_2 = 'set-address-2';
+export const ACTION_SET_ADDRESS_3 = 'set-address-3';
+
 export const initialCartState: Cart = {
-    userID: '',
+    username: '',
     shippingMethodID: 0,
     note: '',
     cartItems: []

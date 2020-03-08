@@ -26,7 +26,7 @@ export interface Producer {
 }
 
 export interface Cart {
-    userID: string;
+    username: string;
     shippingMethodID: number;
     note: string;
     cartItems: CartItem[];
@@ -56,6 +56,26 @@ export interface User {
     email?: string;
     name?: string;
     surname?: string;
+}
+
+export interface UserDetail {
+    id: number;
+    applicationUserID: string;
+    name: string;
+    surname: string;
+    address1: string;
+    address2: string;
+    address3: string;
+    zipCode: string;
+    city: string;
+    country: string;
+    stateRegion: string;
+    applicationUser: User;
+}
+
+export interface PaymentType {
+    id: number;
+    name: string;
 }
 
 export interface Order {
