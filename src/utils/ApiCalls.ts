@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { Discount, Product, Category, Subcategory, User, Cart } from './Types';
-import { localStorageUsernameKey, localStorageRefreshTokenKey, localStorageJWTKey } from './Constants';
+import { LOCAL_STORAGE_USERNAME_KEY, LOCAL_STORAGE_REFRESH_TOKEN_KEY, LOCAL_STORAGE_JWT_KEY } from './Constants';
 
 // TODO change that for sth loaded from .env file
 export const currentLink: string = 'https://localhost:5001';
 
-axios.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem(localStorageJWTKey)}` }
+axios.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_JWT_KEY)}` }
 
 export const getDiscounts = async (): Promise<Discount[]> => {
 
@@ -164,13 +164,13 @@ const checkIf401AndRefresh = async (error: any): Promise<any> => {
 
 export const refreshJWT = async (): Promise<any> => {
 
-    const username: string = localStorage.getItem(localStorageUsernameKey);
-    const refreshToken: string = localStorage.getItem(localStorageRefreshTokenKey);
+    const username: string = localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY);
+    const refreshToken: string = localStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
 
     if (username === '' || refreshToken === '') {
-        localStorage.setItem(localStorageUsernameKey, '');
-        localStorage.setItem(localStorageJWTKey, '');
-        localStorage.setItem(localStorageRefreshTokenKey, '');
+        localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, '');
+        localStorage.setItem(LOCAL_STORAGE_JWT_KEY, '');
+        localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, '');
         return;
     }
 
@@ -182,14 +182,14 @@ export const refreshJWT = async (): Promise<any> => {
             refreshToken
         });
 
-        localStorage.setItem(localStorageJWTKey, response.data.jwt);
-        localStorage.setItem(localStorageRefreshTokenKey, response.data.refreshToken);
+        localStorage.setItem(LOCAL_STORAGE_JWT_KEY, response.data.jwt);
+        localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, response.data.refreshToken);
     } catch (error) {
 
         if (error.response.status === 400) {
-            localStorage.setItem(localStorageUsernameKey, '');
-            localStorage.setItem(localStorageJWTKey, '');
-            localStorage.setItem(localStorageRefreshTokenKey, '');
+            localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, '');
+            localStorage.setItem(LOCAL_STORAGE_JWT_KEY, '');
+            localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, '');
         }
 
         console.log(error);

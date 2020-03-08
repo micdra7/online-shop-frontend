@@ -8,7 +8,7 @@ import CategoryPage from '../CategoryPage/CategoryPage';
 import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 import ProductPage from '../ProductPage/ProductPage';
 import { Cart } from '../../../utils/Types';
-import { sessionStorageCartKey, initialCartState } from '../../../utils/Constants';
+import { SESSION_STORAGE_CART_KEY, initialCartState } from '../../../utils/Constants';
 import CartPage from '../CartPage/CartPage';
 import LoginRegisterPage from '../LoginRegisterPage/LoginRegisterPage';
 import DiscountPage from '../DiscountPage/DiscountPage';
@@ -73,7 +73,7 @@ const App: React.FC = () => {
 
     // saving cart in sessionStorage in case user refreshes the page
     useEffect(() => {
-        const sessionCart: Cart = JSON.parse(sessionStorage.getItem(sessionStorageCartKey));
+        const sessionCart: Cart = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CART_KEY));
 
         if (sessionCart) {
             setCart(sessionCart);
@@ -92,7 +92,7 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        sessionStorage.setItem(sessionStorageCartKey, JSON.stringify(cart));
+        sessionStorage.setItem(SESSION_STORAGE_CART_KEY, JSON.stringify(cart));
     }, [cart.cartItems]);
 
     return (
