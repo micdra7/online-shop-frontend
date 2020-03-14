@@ -22,5 +22,5 @@ export const initialCartState: Cart = {
     username: '',
     shippingMethodID: 0,
     note: '',
-    cartItems: []
+    cartItems: [],
 };

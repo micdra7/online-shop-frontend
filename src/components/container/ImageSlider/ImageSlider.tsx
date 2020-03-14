@@ -9,11 +9,10 @@ export interface ImageSliderProps {
 }
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ imageLinks, hrefs }) => {
-
     const settings = {
         autoplay: true,
         autoplayInterval: 4000,
-        wrapAround: true
+        wrapAround: true,
     };
 
     const renderedImages = imageLinks.map((image, index) => (

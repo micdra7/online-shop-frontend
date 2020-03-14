@@ -11,9 +11,7 @@ export interface NavbarLinkProps {
 
 const NavbarLink: React.FC<NavbarLinkProps> = ({ href, text, handleClick }) => (
     <li className='navbar-link' data-testid='navbar-link' onClick={handleClick}>
-        <Link to={href}>
-            {text}
-        </Link>
+        <Link to={href}>{text}</Link>
     </li>
 );
 

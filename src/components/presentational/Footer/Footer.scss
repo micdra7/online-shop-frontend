@@ -24,8 +24,8 @@
 
         & p {
             margin: 0;
-            font-size: .75rem;
-            padding-left: .5rem;
+            font-size: 0.75rem;
+            padding-left: 0.5rem;
         }
     }
 
@@ -38,11 +38,13 @@
             text-align: center;
             text-decoration: none;
 
-            &:link, &:visited {
+            &:link,
+            &:visited {
                 color: $light;
             }
 
-            &:hover, &:active {
+            &:hover,
+            &:active {
                 color: $light-darker;
             }
         }

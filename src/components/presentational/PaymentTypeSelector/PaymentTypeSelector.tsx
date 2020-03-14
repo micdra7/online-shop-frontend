@@ -8,7 +8,11 @@ export interface PaymentTypeSelectorProps {
     onChange: (event?: any) => void;
 }
 
-const PaymentTypeSelector: React.FC<PaymentTypeSelectorProps> = ({ paymentTypes, selectedId, onChange }) => (
+const PaymentTypeSelector: React.FC<PaymentTypeSelectorProps> = ({
+    paymentTypes,
+    selectedId,
+    onChange,
+}) => (
     <div className='payment-selector'>
         <label>Payment types</label>
         {paymentTypes.map((pType) => (
@@ -19,7 +23,8 @@ const PaymentTypeSelector: React.FC<PaymentTypeSelectorProps> = ({ paymentTypes,
                     name='payment-type'
                     checked={pType.id === selectedId}
                     onChange={(event) => onChange(event)}
-                    value={pType.id} />
+                    value={pType.id}
+                />
 
                 {pType.name}
             </>

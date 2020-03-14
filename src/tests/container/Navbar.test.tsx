@@ -16,13 +16,13 @@ describe('<Navbar />', () => {
 
 const renderNavbarComponent = (props?: NavbarProps) => {
     const defaultProps: NavbarProps = {
-       links: [
-           {href: '/', text: 'Home'},
-           {href: '/products', text: 'Products'}
+        links: [
+            { href: '/', text: 'Home' },
+            { href: '/products', text: 'Products' },
         ],
-       active: false,
-       handleClick: jest.fn,
-       handleLinkClick: jest.fn,
+        active: false,
+        handleClick: jest.fn,
+        handleLinkClick: jest.fn,
     };
 
     return render(

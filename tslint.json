@@ -2,12 +2,15 @@
     "defaultSeverity": "error",
     "extends": [
         "tslint:latest",
-        "tslint-react"
+        "tslint-react",
+        "tslint-plugin-prettier",
+        "tslint-config-prettier"
     ],
     "rules": {
+        "prettier": true,
         "interface-name": [true, "never-prefix"],
         "max-line-length": {
-            "options": [120]
+            "options": [80]
         },
         "no-consecutive-blank-lines": true,
         "semicolon": [true, "always"],

@@ -8,10 +8,7 @@ export interface PrivateRouteProps {
     children?: React.ReactNode;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = (props) => (
-    checkIfLoggedIn() ?
-    <Route {...props} /> :
-    <Redirect to='/login' />
-);
+const PrivateRoute: React.FC<PrivateRouteProps> = (props) =>
+    checkIfLoggedIn() ? <Route {...props} /> : <Redirect to='/login' />;
 
 export default PrivateRoute;

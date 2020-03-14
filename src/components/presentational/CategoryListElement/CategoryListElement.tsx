@@ -8,11 +8,12 @@ export interface CategoryListElementProps {
     subcategories: Subcategory[];
 }
 
-const CategoryListElement: React.FC<CategoryListElementProps> = ({ category, subcategories }) => {
-
+const CategoryListElement: React.FC<CategoryListElementProps> = ({
+    category,
+    subcategories,
+}) => {
     const renderedSubcategories = subcategories.map((subcategory) => (
-        <li key={subcategory.name}
-            className='subcategory'>
+        <li key={subcategory.name} className='subcategory'>
             <Link to={`/subcategory/${subcategory.id}`}>
                 {subcategory.name}
             </Link>

@@ -1,7 +1,6 @@
 @import '../../../variables.scss';
 
 .navbar-link {
-
     width: 100%;
 
     & a {
@@ -24,7 +23,6 @@
     }
 
     @media only screen and (min-width: $medium-bp) {
-
         width: auto;
 
         & a {

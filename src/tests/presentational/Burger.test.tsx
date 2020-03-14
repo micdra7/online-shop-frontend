@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, fireEvent, waitForElement } from '@testing-library/react';
 
-import Burger, { BurgerProps } from '../../components/presentational/Burger/Burger';
+import Burger, {
+    BurgerProps,
+} from '../../components/presentational/Burger/Burger';
 
 describe('<Burger />', () => {
     test('Should render properly', async () => {
@@ -13,7 +15,10 @@ describe('<Burger />', () => {
     });
 
     test('Should respond to prop changes', async () => {
-        const { findByTestId } = renderBurgerComponent({active: true, handleClick: jest.fn()});
+        const { findByTestId } = renderBurgerComponent({
+            active: true,
+            handleClick: jest.fn(),
+        });
 
         const burger = await findByTestId('burger');
 

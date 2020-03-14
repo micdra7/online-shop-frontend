@@ -10,13 +10,14 @@ export interface SubcategoryPageProps {
 }
 
 const SubcategoryPage: React.FC<SubcategoryPageProps> = ({ addToCart }) => {
-
     const { subcategoryId } = useParams();
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response: Product[] = (await getSubcategoryAndProducts(Number(subcategoryId))).products;
+            const response: Product[] = (
+                await getSubcategoryAndProducts(Number(subcategoryId))
+            ).products;
 
             setProducts(response);
         };
@@ -26,7 +27,11 @@ const SubcategoryPage: React.FC<SubcategoryPageProps> = ({ addToCart }) => {
 
     return (
         <div className='subcategory-page'>
-            {products.length > 0 ? <ProductList products={products} addToCart={addToCart} /> : <></>}
+            {products.length > 0 ? (
+                <ProductList products={products} addToCart={addToCart} />
+            ) : (
+                <></>
+            )}
         </div>
     );
 };

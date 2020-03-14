@@ -9,16 +9,21 @@ export interface FormControlProps {
     onChangeHandler: (event?: any) => void;
 }
 
-const FormControl: React.FC<FormControlProps> = ({ label, type, value, name, onChangeHandler }) => (
+const FormControl: React.FC<FormControlProps> = ({
+    label,
+    type,
+    value,
+    name,
+    onChangeHandler,
+}) => (
     <>
-        <label htmlFor={name}>
-            {label}
-        </label>
+        <label htmlFor={name}>{label}</label>
         <input
             type={type}
             value={value}
             onChange={(event) => onChangeHandler(event)}
-            name={name} />
+            name={name}
+        />
     </>
 );
 

@@ -5,7 +5,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-flow: column nowrap;
-    margin: .25rem;
+    margin: 0.25rem;
 
     & * {
         display: block;
@@ -13,18 +13,17 @@
         height: 15%;
         color: $dark;
         background-color: $dark;
-        transition: all .25s ease-in-out, color .25s ease;
+        transition: all 0.25s ease-in-out, color 0.25s ease;
     }
 
     &.active {
-
         & * {
             color: $light;
             background-color: $light;
         }
 
         & .first {
-            transform: translate(0%, 185%) rotate(.125turn);
+            transform: translate(0%, 185%) rotate(0.125turn);
         }
 
         & .second {
@@ -32,7 +31,7 @@
         }
 
         & .third {
-            transform: translate(0%, -185%) rotate(-.125turn);
+            transform: translate(0%, -185%) rotate(-0.125turn);
         }
     }
 }

@@ -8,7 +8,11 @@ export interface ShippingMethodSelectorProps {
     onChange: (event?: any) => void;
 }
 
-const ShippingMethodSelector: React.FC<ShippingMethodSelectorProps> = ({ shippingMethods, selectedId, onChange }) => (
+const ShippingMethodSelector: React.FC<ShippingMethodSelectorProps> = ({
+    shippingMethods,
+    selectedId,
+    onChange,
+}) => (
     <div className='shipping-method-selector'>
         <label>Shipping methods</label>
         {shippingMethods.map((method) => (
@@ -19,7 +23,8 @@ const ShippingMethodSelector: React.FC<ShippingMethodSelectorProps> = ({ shippin
                     name='shipping-method'
                     checked={method.id === selectedId}
                     onChange={(event) => onChange(event)}
-                    value={method.id} />
+                    value={method.id}
+                />
 
                 {method.name}
             </>

@@ -10,8 +10,12 @@ export interface CartItemProps {
     quantity: number;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ deleteItemFromCart, product, quantity, updateItemQuantity }) => {
-
+const CartItem: React.FC<CartItemProps> = ({
+    deleteItemFromCart,
+    product,
+    quantity,
+    updateItemQuantity,
+}) => {
     const [itemCount, setItemCount] = useState(quantity);
 
     const adjustItemCount = (event: any) => {
@@ -23,18 +27,27 @@ const CartItem: React.FC<CartItemProps> = ({ deleteItemFromCart, product, quanti
 
     return (
         <div className='cart-item'>
-            <button className='delete' onClick={() => deleteItemFromCart(product.id)}>
+            <button
+                className='delete'
+                onClick={() => deleteItemFromCart(product.id)}>
                 x
             </button>
 
             <div className='product-info'>
-                <p>{product.producer?.name} {product.name}</p>
                 <p>
-                    <input type='number' className='quantity' value={itemCount}
-                            onChange={adjustItemCount} min='1' max={product.availableQuantity} />
+                    {product.producer?.name} {product.name}
+                </p>
+                <p>
+                    <input
+                        type='number'
+                        className='quantity'
+                        value={itemCount}
+                        onChange={adjustItemCount}
+                        min='1'
+                        max={product.availableQuantity}
+                    />
                 </p>
             </div>
-
         </div>
     );
 };

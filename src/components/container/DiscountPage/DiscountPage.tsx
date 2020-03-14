@@ -9,7 +9,6 @@ export interface DiscountPageProps {
 }
 
 const DiscountPage: React.FC<DiscountPageProps> = ({ addToCart }) => {
-
     const [discounts, setDiscounts] = useState<Discount[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     const [pageContent, setPageContent] = useState();
@@ -26,7 +25,9 @@ const DiscountPage: React.FC<DiscountPageProps> = ({ addToCart }) => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response: Product[] = await getSelectedProducts(discounts.map((discount) => discount.productID));
+            const response: Product[] = await getSelectedProducts(
+                discounts.map((discount) => discount.productID)
+            );
 
             setProducts(response);
         };
@@ -37,25 +38,26 @@ const DiscountPage: React.FC<DiscountPageProps> = ({ addToCart }) => {
     }, [discounts]);
 
     useEffect(() => {
-
         const currentProducts = products;
         currentProducts.forEach((product) => {
+            const currentDiscounts = discounts.filter(
+                (discount) => discount.productID === product.id
+            );
 
-            const currentDiscounts = discounts.filter((discount) => discount.productID === product.id);
-
-            const maxDiscount = Math.max.apply(Math, currentDiscounts.map((d) => d.percentage));
+            const maxDiscount = Math.max.apply(
+                Math,
+                currentDiscounts.map((d) => d.percentage)
+            );
             product.price = product.price - product.price * (maxDiscount / 100);
         });
 
         setProducts(currentProducts);
-        setPageContent(<ProductList products={products} addToCart={addToCart} />);
+        setPageContent(
+            <ProductList products={products} addToCart={addToCart} />
+        );
     }, [products]);
 
-    return (
-        <div className='discount-page'>
-            {pageContent}
-        </div>
-    );
+    return <div className='discount-page'>{pageContent}</div>;
 };
 
 export default DiscountPage;

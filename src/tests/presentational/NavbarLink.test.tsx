@@ -2,7 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 
-import NavbarLink, { NavbarLinkProps } from '../../components/presentational/NavbarLink/NavbarLink';
+import NavbarLink, {
+    NavbarLinkProps,
+} from '../../components/presentational/NavbarLink/NavbarLink';
 
 describe('<NavbarLink />', () => {
     test('Should render properly', async () => {
