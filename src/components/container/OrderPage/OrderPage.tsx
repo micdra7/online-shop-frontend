@@ -12,6 +12,7 @@ import {
     getUserDetails,
     getPaymentTypes,
     sendOrder,
+    saveShippingAddres,
 } from '../../../utils/ApiCalls';
 import {
     ACTION_SET_ADDRESS_1,
@@ -80,21 +81,21 @@ const OrderPage: React.FC<OrderPageProps> = ({ cart }) => {
 
             setUserDetails(response);
 
-            if (response[0].address1 !== null) {
+            if (response[0].address1) {
                 dispatch({
                     type: ACTION_SET_ADDRESS_1,
                     payload: response[0].address1,
                 });
             }
 
-            if (response[0].address2 !== null) {
+            if (response[0].address2) {
                 dispatch({
                     type: ACTION_SET_ADDRESS_2,
                     payload: response[0].address2,
                 });
             }
 
-            if (response[0].address2 !== null) {
+            if (response[0].address3) {
                 dispatch({
                     type: ACTION_SET_ADDRESS_3,
                     payload: response[0].address3,
@@ -119,6 +120,15 @@ const OrderPage: React.FC<OrderPageProps> = ({ cart }) => {
             return response !== null;
         };
 
+        const saveAddress = async () => {
+            await saveShippingAddres({
+                address1: state.address1,
+                address2: state.address2,
+                address3: state.address3,
+            });
+        };
+
+        saveAddress();
         sendOrderPost();
     };
 

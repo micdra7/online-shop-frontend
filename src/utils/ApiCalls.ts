@@ -172,9 +172,37 @@ export const sendOrder = async (cart: Cart) => {
 
     try {
         const response = await axios.post(
-            `${currentLink}/api/account/login`,
+            `${currentLink}/api/order`,
             {
                 ...cart,
+            },
+            options
+        );
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const saveShippingAddres = async (address: {
+    address1: string;
+    address2: string;
+    address3: string;
+}) => {
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    try {
+        const response = await axios.post(
+            `${currentLink}/api/account/update-address`,
+            {
+                ...address,
+                username: localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY),
             },
             options
         );

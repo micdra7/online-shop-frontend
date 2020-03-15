@@ -27,8 +27,8 @@ const App: React.FC = () => {
         { href: '/discounts', text: 'Discounts' },
         { href: '/cart', text: 'Cart' },
         {
-            href: checkIfLoggedIn ? '/account' : '/login',
-            text: checkIfLoggedIn ? 'My account' : 'Login / Register',
+            href: checkIfLoggedIn() ? '/account' : '/login',
+            text: checkIfLoggedIn() ? 'My account' : 'Login / Register',
         },
     ];
 
