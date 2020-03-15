@@ -19,6 +19,7 @@ import PrivateRoute from '../../presentational/PrivateRoute/PrivateRoute';
 import OrderPage from '../OrderPage/OrderPage';
 import { refreshJWT } from '../../../utils/ApiCalls';
 import { checkIfLoggedIn } from '../../../utils/Helper';
+import AccountPage from '../AccountPage/AccountPage';
 
 const App: React.FC = () => {
     const links = [
@@ -150,6 +151,10 @@ const App: React.FC = () => {
 
                         <PrivateRoute path='/order'>
                             <OrderPage cart={cart} />
+                        </PrivateRoute>
+
+                        <PrivateRoute path='/account'>
+                            <AccountPage />
                         </PrivateRoute>
 
                         <Route path='/login'>

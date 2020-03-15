@@ -10,6 +10,7 @@ import {
     ACTION_SET_ADDRESS_2,
     ACTION_SET_ADDRESS_3,
     ACTION_SET_PAYMENT_TYPE_ID,
+    ACTION_SET_PASSWORD_CONFIRM,
 } from './Constants';
 
 export const loginPageReducer = (
@@ -66,6 +67,56 @@ export const orderPageReducer = (
             return {
                 ...state,
                 note: action.payload,
+            };
+        case ACTION_SET_ADDRESS_1:
+            return {
+                ...state,
+                address1: action.payload,
+            };
+        case ACTION_SET_ADDRESS_2:
+            return {
+                ...state,
+                address2: action.payload,
+            };
+        case ACTION_SET_ADDRESS_3:
+            return {
+                ...state,
+                address3: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+
+export const accountPageReducer = (
+    state: any,
+    action: { type: string; payload: any }
+) => {
+    switch (action.type) {
+        case ACTION_SET_NAME:
+            return {
+                ...state,
+                name: action.payload,
+            };
+        case ACTION_SET_SURNAME:
+            return {
+                ...state,
+                surname: action.payload,
+            };
+        case ACTION_SET_PASSWORD:
+            return {
+                ...state,
+                password: action.payload,
+            };
+        case ACTION_SET_PASSWORD_CONFIRM:
+            return {
+                ...state,
+                passwordConfirm: action.payload,
+            };
+        case ACTION_SET_EMAIL:
+            return {
+                ...state,
+                email: action.payload,
             };
         case ACTION_SET_ADDRESS_1:
             return {

@@ -9,6 +9,7 @@ import {
     UserDetail,
     ShippingMethod,
     PaymentType,
+    Order,
 } from './Types';
 import {
     LOCAL_STORAGE_USERNAME_KEY,
@@ -250,6 +251,57 @@ export const getUserDetails = async (): Promise<UserDetail[]> => {
     try {
         const response = await axios.post(
             `${currentLink}/api/account/details`,
+            {
+                username: localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY),
+            },
+            options
+        );
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const updateUserDetails = async (details: UserDetail[], user: User) => {
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    try {
+        const response = await axios.post(
+            `${currentLink}/api/account/update`,
+            {
+                user,
+                address: {
+                    address1: details[0].address1,
+                    address2: details[0].address2,
+                    address3: details[0].address3,
+                },
+            },
+            options
+        );
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
+export const getOrdersForUser = async (): Promise<Order[]> => {
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    try {
+        const response = await axios.post(
+            `${currentLink}/api/order/history`,
             {
                 username: localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY),
             },
