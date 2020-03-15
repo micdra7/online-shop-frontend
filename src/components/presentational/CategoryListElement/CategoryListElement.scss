@@ -16,8 +16,9 @@
     & .subcategory {
         text-align: center;
         flex: 1 1 50%;
-        
-        &:nth-of-type(2), &:nth-of-type(3) {
+
+        &:nth-of-type(2),
+        &:nth-of-type(3) {
             border-top: 1px solid $dark;
         }
 
@@ -26,11 +27,13 @@
             display: inline-block;
             width: 100%;
 
-            &:link, &:visited {
+            &:link,
+            &:visited {
                 color: $dark;
             }
 
-            &:hover, &:active {
+            &:hover,
+            &:active {
                 color: $dark-lighter;
             }
         }

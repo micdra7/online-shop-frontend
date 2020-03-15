@@ -8,7 +8,10 @@ import CategoryPage from '../CategoryPage/CategoryPage';
 import SubcategoryPage from '../SubcategoryPage/SubcategoryPage';
 import ProductPage from '../ProductPage/ProductPage';
 import { Cart } from '../../../utils/Types';
-import { SESSION_STORAGE_CART_KEY, initialCartState } from '../../../utils/Constants';
+import {
+    SESSION_STORAGE_CART_KEY,
+    initialCartState,
+} from '../../../utils/Constants';
 import CartPage from '../CartPage/CartPage';
 import LoginRegisterPage from '../LoginRegisterPage/LoginRegisterPage';
 import DiscountPage from '../DiscountPage/DiscountPage';
@@ -16,18 +19,18 @@ import PrivateRoute from '../../presentational/PrivateRoute/PrivateRoute';
 import OrderPage from '../OrderPage/OrderPage';
 import { refreshJWT } from '../../../utils/ApiCalls';
 import { checkIfLoggedIn } from '../../../utils/Helper';
+import AccountPage from '../AccountPage/AccountPage';
 
 const App: React.FC = () => {
-
     const links = [
         { href: '/', text: 'Home' },
         { href: '/categories', text: 'Categories' },
         { href: '/discounts', text: 'Discounts' },
         { href: '/cart', text: 'Cart' },
         {
-            href: checkIfLoggedIn ? '/account' : '/login',
-            text: checkIfLoggedIn ? 'My account' : 'Login / Register'
-        }
+            href: checkIfLoggedIn() ? '/account' : '/login',
+            text: checkIfLoggedIn() ? 'My account' : 'Login / Register',
+        },
     ];
 
     const [burgerActive, setBurgerActive] = useState(false);
@@ -46,8 +49,8 @@ const App: React.FC = () => {
             ...cart,
             cartItems: cart.cartItems.concat({
                 productID: productId,
-                quantity
-            })
+                quantity,
+            }),
         });
     };
 
@@ -56,28 +59,34 @@ const App: React.FC = () => {
     };
 
     const deleteItemFromCart = (productId: number) => {
-        const newCartItems = cart.cartItems.filter((item) => item.productID !== productId);
+        const newCartItems = cart.cartItems.filter(
+            (item) => item.productID !== productId
+        );
 
         setCart({
             ...cart,
-            cartItems: newCartItems
+            cartItems: newCartItems,
         });
     };
 
     const updateItemQuantity = (productId: number, quantity: number) => {
-        let newCartItems = cart.cartItems.filter((item) => item.productID !== productId);
+        let newCartItems = cart.cartItems.filter(
+            (item) => item.productID !== productId
+        );
 
-        newCartItems = newCartItems.concat({productID: productId, quantity});
+        newCartItems = newCartItems.concat({ productID: productId, quantity });
 
         setCart({
             ...cart,
-            cartItems: newCartItems
+            cartItems: newCartItems,
         });
     };
 
     // saving cart in sessionStorage in case user refreshes the page
     useEffect(() => {
-        const sessionCart: Cart = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CART_KEY));
+        const sessionCart: Cart = JSON.parse(
+            sessionStorage.getItem(SESSION_STORAGE_CART_KEY)
+        );
 
         if (sessionCart) {
             setCart(sessionCart);
@@ -102,10 +111,12 @@ const App: React.FC = () => {
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
             <Router>
-                <Navbar links={links}
+                <Navbar
+                    links={links}
                     active={burgerActive}
                     handleClick={handleBurgerClick}
-                    handleLinkClick={handleLinkClick} />
+                    handleLinkClick={handleLinkClick}
+                />
 
                 <section className='main'>
                     <Switch>
@@ -134,11 +145,16 @@ const App: React.FC = () => {
                                 cart={cart}
                                 clearCart={clearCart}
                                 deleteItemFromCart={deleteItemFromCart}
-                                updateItemQuantity={updateItemQuantity} />
+                                updateItemQuantity={updateItemQuantity}
+                            />
                         </Route>
 
                         <PrivateRoute path='/order'>
                             <OrderPage cart={cart} />
+                        </PrivateRoute>
+
+                        <PrivateRoute path='/account'>
+                            <AccountPage />
                         </PrivateRoute>
 
                         <Route path='/login'>

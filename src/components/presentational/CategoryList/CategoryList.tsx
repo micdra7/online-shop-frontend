@@ -8,21 +8,22 @@ export interface CategoryListProps {
     subcategories: Subcategory[];
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({ categories, subcategories }) => {
-
+const CategoryList: React.FC<CategoryListProps> = ({
+    categories,
+    subcategories,
+}) => {
     const renderedCategories = categories.map((category) => (
         <CategoryListElement
             key={category.name}
             category={category}
             // tslint:disable-next-line: triple-equals
-            subcategories={subcategories.filter((s) => s.categoryID == category.id)} />
+            subcategories={subcategories.filter(
+                (s) => s.categoryID == category.id
+            )}
+        />
     ));
 
-    return (
-        <div className='category-list'>
-            {renderedCategories}
-        </div>
-    );
+    return <div className='category-list'>{renderedCategories}</div>;
 };
 
 export default CategoryList;

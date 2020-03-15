@@ -16,11 +16,13 @@
         justify-content: center;
         align-items: center;
 
-        &:link, &:visited {
+        &:link,
+        &:visited {
             color: $dark;
         }
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
             color: $dark-lighter;
 
             & .price {
@@ -30,7 +32,7 @@
 
         & .price {
             color: $dark-lighter;
-            font-size: .75em;
+            font-size: 0.75em;
         }
 
         & p {
@@ -38,11 +40,11 @@
             width: 80%;
         }
     }
-    
+
     & img {
         display: block;
         width: 80%;
-        padding: .5rem;
+        padding: 0.5rem;
 
         @media (min-width: $small-bp) {
             width: 50%;
@@ -55,11 +57,12 @@
         font-size: 1.05rem;
         color: $light;
         background-color: $dark;
-        transition: all .5s ease-in-out;
+        transition: all 0.5s ease-in-out;
         border: 1px solid $dark;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
             color: $dark;
             background-color: $light;
         }

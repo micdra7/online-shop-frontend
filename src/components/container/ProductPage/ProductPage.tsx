@@ -9,15 +9,13 @@ export interface ProductPageProps {
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
-
     const { productId } = useParams();
     const [itemCount, setItemCount] = useState(1);
     const [product, setProduct] = useState<Product>(null);
     const [price, setPrice] = useState(0);
 
     const adjustItemCount = (event: any) => {
-        setItemCount(
-            Number(event.target.value));
+        setItemCount(Number(event.target.value));
     };
 
     useEffect(() => {
@@ -32,7 +30,10 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
 
     useEffect(() => {
         if (product?.discounts?.length > 0) {
-            const maxDiscount = Math.max.apply(Math, product.discounts.map((d) => d.percentage));
+            const maxDiscount = Math.max.apply(
+                Math,
+                product.discounts.map((d) => d.percentage)
+            );
 
             setPrice(product.price - product.price * (maxDiscount / 100));
         } else {
@@ -42,22 +43,33 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
 
     const PageContent: React.FC = () => (
         <div className='product-page'>
-            <img src={`${currentLink}/images/${productId}.png`} alt={`Image for product: ${product.name}`} />
+            <img
+                src={`${currentLink}/images/${productId}.png`}
+                alt={`Image for product: ${product.name}`}
+            />
 
             <aside className='info'>
-                <p>{product.producer.name} {product.name}</p>
-
                 <p>
-                    <input type='number' className='quantity' value={itemCount}
-                        onChange={adjustItemCount} min='1' max={product.availableQuantity} />
+                    {product.producer.name} {product.name}
                 </p>
 
                 <p>
-                    <span className='price'>
-                        {price}$
-                    </span>
+                    <input
+                        type='number'
+                        className='quantity'
+                        value={itemCount}
+                        onChange={adjustItemCount}
+                        min='1'
+                        max={product.availableQuantity}
+                    />
+                </p>
 
-                    <button className='add-to-cart' onClick={() => addToCart(product.id, itemCount)}>
+                <p>
+                    <span className='price'>{price}$</span>
+
+                    <button
+                        className='add-to-cart'
+                        onClick={() => addToCart(product.id, itemCount)}>
                         Add to cart
                     </button>
                 </p>
@@ -65,11 +77,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
         </div>
     );
 
-    return (
-        product !== null ?
-        <PageContent /> :
-        <></>
-    );
+    return product !== null ? <PageContent /> : <></>;
 };
 
 export default ProductPage;

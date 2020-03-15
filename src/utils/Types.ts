@@ -56,21 +56,18 @@ export interface User {
     email?: string;
     name?: string;
     surname?: string;
+    passwordConfirm?: string;
 }
 
 export interface UserDetail {
-    id: number;
-    applicationUserID: string;
-    name: string;
-    surname: string;
-    address1: string;
-    address2: string;
-    address3: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    stateRegion: string;
-    applicationUser: User;
+    id?: number;
+    applicationUserID?: string;
+    name?: string;
+    surname?: string;
+    address1?: string;
+    address2?: string;
+    address3?: string;
+    applicationUser?: User;
 }
 
 export interface PaymentType {
