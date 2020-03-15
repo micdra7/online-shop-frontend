@@ -1,6 +1,7 @@
 import React from 'react';
 import './PaymentTypeSelector.scss';
 import { PaymentType } from '../../../utils/Types';
+import FormControl from '../FormControl/FormControl';
 
 export interface PaymentTypeSelectorProps {
     paymentTypes: PaymentType[];
@@ -16,18 +17,14 @@ const PaymentTypeSelector: React.FC<PaymentTypeSelectorProps> = ({
     <div className='payment-selector'>
         <label>Payment types</label>
         {paymentTypes.map((pType) => (
-            <>
-                <input
-                    key={pType.name}
-                    type='radio'
-                    name='payment-type'
-                    checked={pType.id === selectedId}
-                    onChange={(event) => onChange(event)}
-                    value={pType.id}
-                />
-
-                {pType.name}
-            </>
+            <FormControl
+                key={pType.name}
+                label={pType.name}
+                type='radio'
+                name='payment-type'
+                onChangeHandler={(event: any) => onChange(event)}
+                value={pType.id.toString()}
+            />
         ))}
     </div>
 );
