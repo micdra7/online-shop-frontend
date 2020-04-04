@@ -315,6 +315,17 @@ export const getOrdersForUser = async (): Promise<Order[]> => {
     }
 };
 
+export const getOrder = async (id: number): Promise<Order> => {
+    try {
+        const response = await axios.get(`${currentLink}/api/order/${id}`);
+
+        return response.data;
+    } catch (error) {
+        checkIf401AndRefresh(error);
+        return null;
+    }
+};
+
 const checkIf401AndRefresh = async (error: any): Promise<any> => {
     if (error.response.status === 401) {
         refreshJWT();
