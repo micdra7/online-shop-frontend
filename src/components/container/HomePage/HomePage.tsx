@@ -60,18 +60,11 @@ const HomePage: React.FC<HomePageProps> = ({ addToCart }) => {
 
     return (
         <div className='home-page'>
-            <TransitionGroup className='transition-group'>
-                <CSSTransition
-                    key={discounts.length + products.length}
-                    classNames='fade'
-                    timeout={300}>
-                    {discounts.length > 0 && products.length > 0 ? (
-                        <HomePageContent />
-                    ) : (
-                        <LoadingSpinner />
-                    )}
-                </CSSTransition>
-            </TransitionGroup>
+            {discounts.length > 0 && products.length > 0 ? (
+                <HomePageContent />
+            ) : (
+                <LoadingSpinner />
+            )}
         </div>
     );
 };
