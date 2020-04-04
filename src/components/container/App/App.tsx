@@ -20,16 +20,25 @@ import OrderPage from '../OrderPage/OrderPage';
 import { refreshJWT } from '../../../utils/ApiCalls';
 import { checkIfLoggedIn } from '../../../utils/Helper';
 import AccountPage from '../AccountPage/AccountPage';
+import {
+    faHome,
+    faList,
+    faShoppingCart,
+    faPercentage,
+    faSignInAlt,
+    faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 const App: React.FC = () => {
     const links = [
-        { href: '/', text: 'Home' },
-        { href: '/categories', text: 'Categories' },
-        { href: '/discounts', text: 'Discounts' },
-        { href: '/cart', text: 'Cart' },
+        { href: '/', text: 'Home', icon: faHome },
+        { href: '/categories', text: 'Categories', icon: faList },
+        { href: '/discounts', text: 'Discounts', icon: faPercentage },
+        { href: '/cart', text: 'Cart', icon: faShoppingCart },
         {
             href: checkIfLoggedIn() ? '/account' : '/login',
             text: checkIfLoggedIn() ? 'My account' : 'Login / Register',
+            icon: checkIfLoggedIn() ? faUser : faSignInAlt,
         },
     ];
 
@@ -111,12 +120,7 @@ const App: React.FC = () => {
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
             <Router>
-                <Navbar
-                    links={links}
-                    active={burgerActive}
-                    handleClick={handleBurgerClick}
-                    handleLinkClick={handleLinkClick}
-                />
+                <Navbar links={links} active={burgerActive} />
 
                 <section className='main'>
                     <Switch>

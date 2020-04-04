@@ -1,0 +1,45 @@
+@import '../../../variables.scss';
+
+.navbar-link {
+    box-sizing: content-box;
+
+    flex: 1;
+    flex-basis: 20%;
+
+    font-size: 0.75rem;
+
+    & a {
+        display: inline-block;
+        width: 100%;
+
+        text-decoration: none;
+        text-align: center;
+        color: $light;
+
+        transition: color 0.5s ease-in-out;
+
+        &:hover,
+        &:active {
+            color: $light-darker;
+        }
+
+        & p {
+            margin: 0;
+        }
+
+        & svg {
+            font-size: 1.5rem;
+        }
+    }
+
+    &.selected {
+        border-bottom: 4px solid $light;
+
+        transition: border-color 0.5s ease-in-out;
+
+        &:hover,
+        &:active {
+            border-color: $light-darker;
+        }
+    }
+}

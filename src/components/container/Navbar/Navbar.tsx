@@ -2,38 +2,29 @@ import React, { useState } from 'react';
 import './Navbar.scss';
 import NavbarLink from '../../presentational/NavbarLink/NavbarLink';
 import Burger from '../../presentational/Burger/Burger';
+import { useLocation } from 'react-router-dom';
 
 export interface NavbarProps {
-    links: Array<{ href: string; text: string }>;
+    links: Array<{ href: string; text: string; icon: any }>;
     active: boolean;
-    handleClick: (event?: any) => void;
-    handleLinkClick: (event?: any) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({
-    links,
-    active,
-    handleClick,
-    handleLinkClick,
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ links, active }) => {
+    const location = useLocation();
+
     const renderedLinks = links.map((link) => (
         <NavbarLink
             key={link.href}
             href={link.href}
             text={link.text}
-            handleClick={handleLinkClick}
+            icon={link.icon}
+            isSelected={location.pathname === link.href}
         />
     ));
 
     return (
         <nav className={active ? 'navbar active' : 'navbar'}>
-            <div className='brand'>
-                <img src='/public/logo.png' alt='logo' />
-            </div>
             <ul className='nav'>{renderedLinks}</ul>
-            <Burger active={active} handleClick={handleClick} />
-
-            <div className='bottom' />
         </nav>
     );
 };

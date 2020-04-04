@@ -1,0 +1,22 @@
+@import '../../../variables.scss';
+
+html {
+    box-sizing: border-box;
+    font-family: $content-font;
+}
+
+body {
+    margin: 0;
+}
+
+#app,
+.wrapper {
+    width: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    font-family: inherit;
+}
