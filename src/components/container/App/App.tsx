@@ -28,6 +28,7 @@ import {
     faSignInAlt,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import SearchBar from '../SearchBar/SearchBar';
 
 const App: React.FC = () => {
     const links = [
@@ -120,6 +121,7 @@ const App: React.FC = () => {
     return (
         <div className={burgerActive ? 'wrapper active' : 'wrapper'}>
             <Router>
+                <SearchBar />
                 <Navbar links={links} active={burgerActive} />
 
                 <section className='main'>

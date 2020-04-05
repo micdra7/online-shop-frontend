@@ -1,0 +1,64 @@
+@import '../../../variables.scss';
+
+.search-bar {
+    width: 100%;
+    height: 2rem;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    border: 1px solid transparent;
+
+    & .logo {
+        height: 100%;
+        width: auto;
+
+        align-self: start;
+    }
+
+    & .search-input {
+        height: 100%;
+
+        font-size: 1.25rem;
+
+        flex: 4;
+
+        border-color: $dark-lighter;
+        border-right: 0;
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+
+        transition: box-shadow 0.15s ease-in-out;
+
+        &:focus {
+            box-shadow: 0 0 0 0.1rem $dark-lighter;
+
+            & + .search-button {
+                box-shadow: 0 0 0 0.1rem $dark-lighter;
+            }
+        }
+    }
+
+    & .search-button {
+        height: 100%;
+
+        flex: 1;
+
+        padding: 0;
+        border-color: $dark-lighter;
+        border-left: 0;
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+
+        background-color: $dark;
+        color: $light;
+
+        transition: box-shadow 0.15s ease-in-out;
+    }
+}
